@@ -7,14 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E31689CC1F559C5F00D06D8C /* LPPhotoSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31689CB1F559C5F00D06D8C /* LPPhotoSelectVC.swift */; };
 		E35EF93D1F556A500052F365 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35EF93C1F556A500052F365 /* AppDelegate.swift */; };
 		E35EF93F1F556A500052F365 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35EF93E1F556A500052F365 /* ViewController.swift */; };
 		E35EF9421F556A500052F365 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E35EF9401F556A500052F365 /* Main.storyboard */; };
 		E35EF9441F556A500052F365 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E35EF9431F556A500052F365 /* Assets.xcassets */; };
 		E35EF9471F556A500052F365 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E35EF9451F556A500052F365 /* LaunchScreen.storyboard */; };
+		E35EF9531F556C910052F365 /* LPImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35EF9521F556C910052F365 /* LPImagePickerController.swift */; };
+		E35EF9551F556E460052F365 /* LPGroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35EF9541F556E460052F365 /* LPGroupVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E31689CB1F559C5F00D06D8C /* LPPhotoSelectVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LPPhotoSelectVC.swift; sourceTree = "<group>"; };
 		E35EF9391F556A500052F365 /* 01-微信相册选择.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "01-微信相册选择.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E35EF93C1F556A500052F365 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E35EF93E1F556A500052F365 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +26,8 @@
 		E35EF9431F556A500052F365 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E35EF9461F556A500052F365 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E35EF9481F556A500052F365 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E35EF9521F556C910052F365 /* LPImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LPImagePickerController.swift; sourceTree = "<group>"; };
+		E35EF9541F556E460052F365 /* LPGroupVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LPGroupVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +60,7 @@
 		E35EF93B1F556A500052F365 /* 01-微信相册选择 */ = {
 			isa = PBXGroup;
 			children = (
+				E35EF94E1F556A8A0052F365 /* WYPhotoes */,
 				E35EF93C1F556A500052F365 /* AppDelegate.swift */,
 				E35EF93E1F556A500052F365 /* ViewController.swift */,
 				E35EF9401F556A500052F365 /* Main.storyboard */,
@@ -62,6 +69,40 @@
 				E35EF9481F556A500052F365 /* Info.plist */,
 			);
 			path = "01-微信相册选择";
+			sourceTree = "<group>";
+		};
+		E35EF94E1F556A8A0052F365 /* WYPhotoes */ = {
+			isa = PBXGroup;
+			children = (
+				E35EF94F1F556B690052F365 /* Controllers */,
+				E35EF9501F556B690052F365 /* Models */,
+				E35EF9511F556B690052F365 /* Views */,
+			);
+			path = WYPhotoes;
+			sourceTree = "<group>";
+		};
+		E35EF94F1F556B690052F365 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E35EF9521F556C910052F365 /* LPImagePickerController.swift */,
+				E35EF9541F556E460052F365 /* LPGroupVC.swift */,
+				E31689CB1F559C5F00D06D8C /* LPPhotoSelectVC.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		E35EF9501F556B690052F365 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E35EF9511F556B690052F365 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +178,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E31689CC1F559C5F00D06D8C /* LPPhotoSelectVC.swift in Sources */,
+				E35EF9551F556E460052F365 /* LPGroupVC.swift in Sources */,
 				E35EF93F1F556A500052F365 /* ViewController.swift in Sources */,
 				E35EF93D1F556A500052F365 /* AppDelegate.swift in Sources */,
+				E35EF9531F556C910052F365 /* LPImagePickerController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,6 +346,7 @@
 				E35EF94D1F556A500052F365 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
