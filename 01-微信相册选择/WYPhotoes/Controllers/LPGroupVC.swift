@@ -11,6 +11,13 @@ import Photos
 
 class LPGroupVC: UIViewController {
 
+    var assets: PHFetchResult<PHAsset>!
+    fileprivate lazy var fetchOption: PHFetchOptions = {
+        let fetchOption = PHFetchOptions()
+        fetchOption.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        return fetchOption
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,6 +27,13 @@ class LPGroupVC: UIViewController {
     private func setupUI() {
         setupNavBar()
         getPhotoGroup()
+        pushMyPhotoStream()
+    }
+    
+    private func pushMyPhotoStream() {
+        let photoSelectVC = LPPhotoSelectVC()
+        photoSelectVC.assets = assets
+        navigationController?.pushViewController(photoSelectVC, animated: false)
     }
     
     private func setupNavBar() {
@@ -51,16 +65,9 @@ extension LPGroupVC {
         // 3.我的照片流
         let myPhotoStream = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumMyPhotoStream, options: nil)
         myPhotoStream.enumerateObjects({ (assetCollection, _, _) in
+            self.assets = PHAsset.fetchAssets(in: assetCollection, options: self.fetchOption)
             print("name = \(assetCollection.localizedLocationNames), count = \(assetCollection.estimatedAssetCount), title = \(assetCollection.localizedTitle ?? "没有名称")")
         })
-    }
-    
-    fileprivate func learnAlumb() {
-        
-        // 3.获取所有资源集合，并按资源的创建时间排序
-        //        let allPhotoOptions = PHFetchOptions()
-        //        allPhotoOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
-        //        let allPhotoes = PHAsset.fetchAssets(with: allPhotoOptions)
     }
 }
 

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LPPhotoSelectCell" id="gTV-IL-0wX" customClass="LPPhotoSelectCell" customModule="_1_微信相册选择" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="120" height="100"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="120" height="100"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DJG-mm-wWn">
+                        <rect key="frame" x="0.0" y="0.0" width="120" height="100"/>
+                    </imageView>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="00V-Mz-ndi">
+                        <rect key="frame" x="0.0" y="0.0" width="120" height="100"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mrl-MU-MR8">
+                        <rect key="frame" x="80" y="0.0" width="40" height="40"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fAH-Wb-uRD">
+                                <rect key="frame" x="14" y="7" width="19" height="22"/>
+                                <state key="normal" image="select_photo_nor"/>
+                                <state key="selected" image="select_photo1_pre"/>
+                                <state key="highlighted" image="select_photo1_pre"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aku-gp-d8l">
+                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                <connections>
+                                    <action selector="selectedBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="XTe-9G-DQx"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="Aku-gp-d8l" firstAttribute="top" secondItem="mrl-MU-MR8" secondAttribute="top" id="1XW-4b-sHr"/>
+                            <constraint firstAttribute="bottom" secondItem="Aku-gp-d8l" secondAttribute="bottom" id="8gw-c5-rHC"/>
+                            <constraint firstItem="Aku-gp-d8l" firstAttribute="leading" secondItem="mrl-MU-MR8" secondAttribute="leading" id="IJQ-7B-G8F"/>
+                            <constraint firstAttribute="trailing" secondItem="Aku-gp-d8l" secondAttribute="trailing" id="VhS-VV-qqt"/>
+                            <constraint firstAttribute="width" constant="40" id="Xq8-9b-XIk"/>
+                            <constraint firstAttribute="trailing" secondItem="fAH-Wb-uRD" secondAttribute="trailing" constant="7" id="XzU-98-qgf"/>
+                            <constraint firstAttribute="height" constant="40" id="mS3-KT-mr5"/>
+                            <constraint firstItem="fAH-Wb-uRD" firstAttribute="top" secondItem="mrl-MU-MR8" secondAttribute="top" constant="7" id="tnI-dV-pq0"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="00V-Mz-ndi" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="7dJ-lh-YOa"/>
+                <constraint firstAttribute="trailing" secondItem="DJG-mm-wWn" secondAttribute="trailing" id="8Iy-df-oEt"/>
+                <constraint firstItem="00V-Mz-ndi" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="CYi-A6-map"/>
+                <constraint firstItem="DJG-mm-wWn" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="LXN-Cx-CE6"/>
+                <constraint firstItem="mrl-MU-MR8" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="McA-CG-acb"/>
+                <constraint firstItem="DJG-mm-wWn" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="cUO-nM-azZ"/>
+                <constraint firstAttribute="bottom" secondItem="00V-Mz-ndi" secondAttribute="bottom" id="g52-mo-l92"/>
+                <constraint firstAttribute="trailing" secondItem="mrl-MU-MR8" secondAttribute="trailing" id="i7p-6I-H6P"/>
+                <constraint firstAttribute="bottom" secondItem="DJG-mm-wWn" secondAttribute="bottom" id="mFd-Hl-WR7"/>
+                <constraint firstAttribute="trailing" secondItem="00V-Mz-ndi" secondAttribute="trailing" id="qQh-4w-XxX"/>
+            </constraints>
+            <size key="customSize" width="120" height="100"/>
+            <connections>
+                <outlet property="coverView" destination="00V-Mz-ndi" id="NKh-N0-r7N"/>
+                <outlet property="iconView" destination="DJG-mm-wWn" id="G4x-Tg-Rms"/>
+                <outlet property="rightView" destination="mrl-MU-MR8" id="zlM-5W-ScZ"/>
+                <outlet property="selectedBtn" destination="fAH-Wb-uRD" id="c7g-Ak-cZI"/>
+            </connections>
+            <point key="canvasLocation" x="-33" y="57"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="select_photo1_pre" width="19" height="19"/>
+        <image name="select_photo_nor" width="19" height="19"/>
+    </resources>
+</document>
