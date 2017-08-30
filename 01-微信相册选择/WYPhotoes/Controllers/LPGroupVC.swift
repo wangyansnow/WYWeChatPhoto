@@ -11,7 +11,7 @@ import Photos
 
 class LPGroupVC: UIViewController {
 
-    var assets: PHFetchResult<PHAsset>!
+    var groups = [PHAssetCollection]()
     fileprivate lazy var fetchOption: PHFetchOptions = {
         let fetchOption = PHFetchOptions()
         fetchOption.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
@@ -32,7 +32,8 @@ class LPGroupVC: UIViewController {
     
     private func pushMyPhotoStream() {
         let photoSelectVC = LPPhotoSelectVC()
-        photoSelectVC.assets = assets
+        photoSelectVC.assets = PHAsset.fetchAssets(in: groups.last!, options: nil)
+        photoSelectVC.title = groups.last?.localizedTitle
         navigationController?.pushViewController(photoSelectVC, animated: false)
     }
     
@@ -49,23 +50,28 @@ class LPGroupVC: UIViewController {
 extension LPGroupVC {
     
     fileprivate func getPhotoGroup() {
+        
         // 1.相机胶卷
         let cameraRoll = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumUserLibrary, options: nil)
         cameraRoll.enumerateObjects({ (assetCollection, _, _) in
              let assets = PHAsset.fetchAssets(in: assetCollection, options: nil)
+            self.groups.append(assetCollection)
             print("name = \(assetCollection.localizedLocationNames), count = \(assets.count), title = \(assetCollection.localizedTitle ?? "没有名称")")
         })
         
         // 2.其他所有相簿
         let screenshots = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumRegular, options: nil)
         screenshots.enumerateObjects({ (assetCollection, _, _) in
+            
+            self.groups.append(assetCollection)
             print("name = \(assetCollection.localizedLocationNames), count = \(assetCollection.estimatedAssetCount), title = \(assetCollection.localizedTitle ?? "没有名称")")
         })
         
         // 3.我的照片流
         let myPhotoStream = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumMyPhotoStream, options: nil)
         myPhotoStream.enumerateObjects({ (assetCollection, _, _) in
-            self.assets = PHAsset.fetchAssets(in: assetCollection, options: self.fetchOption)
+            
+            self.groups.append(assetCollection)
             print("name = \(assetCollection.localizedLocationNames), count = \(assetCollection.estimatedAssetCount), title = \(assetCollection.localizedTitle ?? "没有名称")")
         })
     }

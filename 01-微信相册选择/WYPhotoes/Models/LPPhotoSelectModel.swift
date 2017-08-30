@@ -24,6 +24,18 @@ class LPPhotoSelectModel: NSObject {
     var thumbSize = CGSize.zero
     var isCamera = false
     var isShowCover = false
+    var originImage: UIImage? {
+        get {
+            let options = PHImageRequestOptions()
+            options.isSynchronous = true
+            
+            var img: UIImage?
+            PHImageManager.default().requestImage(for: asset!, targetSize: PHImageManagerMaximumSize, contentMode: .default, options: options) { (image, _) in
+                img = image
+            }
+            return img
+        }
+    }
     
     class func handleAssets(assets: PHFetchResult<PHAsset>, size: CGSize) -> [LPPhotoSelectModel] {
         var models = [LPPhotoSelectModel]()
