@@ -114,7 +114,6 @@ class LPPhotoBrowserVC: UIViewController {
         let bottomView = UIView(frame: CGRect(x: 0, y: view.bounds.height - 46, width: view.bounds.width - 20, height: 46))
         
         let sendBtn = UIButton(frame: CGRect(x: view.bounds.width - 109, y: 8.5, width: 77, height: 28))
-        sendBtn.backgroundColor = UIColor(hex:0x9256ff)
         sendBtn.addTarget(self, action: #selector(sendBtnClick), for: .touchUpInside)
         sendBtn.clipsToBounds = true
         sendBtn.layer.cornerRadius = 14
@@ -175,8 +174,12 @@ class LPPhotoBrowserVC: UIViewController {
         var title = "Send"
         if selectedIndexs.count > 0 {
             title = String(format: "Send(%d)", selectedIndexs.count)
+            sendBtn.backgroundColor = UIColor(hex:0x9256ff)
+        } else {
+            sendBtn.backgroundColor = UIColor(hex: 0xc7c7cc)
         }
         sendBtn.setTitle(title, for: .normal)
+        sendBtn.isEnabled = selectedIndexs.count > 0
     }
 }
 

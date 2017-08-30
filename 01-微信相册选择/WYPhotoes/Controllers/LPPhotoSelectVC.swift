@@ -70,12 +70,13 @@ class LPPhotoSelectVC: UIViewController {
         let bottomView = UIView(frame: CGRect(x: 0, y: view.bounds.height - 46, width: view.bounds.width, height: 46))
         
         sendBtn = UIButton(frame: CGRect(x: view.bounds.width - 89, y: 8.5, width: 77, height: 28))
-        sendBtn.backgroundColor = UIColor(hex:0x9256ff)
+        sendBtn.backgroundColor = UIColor(hex: 0xc7c7cc)
         sendBtn.addTarget(self, action: #selector(sendBtnClick), for: .touchUpInside)
         sendBtn.setTitle("Send", for: .normal)
         sendBtn.clipsToBounds = true
         sendBtn.layer.cornerRadius = 14
         sendBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
+        sendBtn.isEnabled = false
         
         bottomView.addSubview(sendBtn)
         view.addSubview(bottomView)
@@ -108,6 +109,9 @@ class LPPhotoSelectVC: UIViewController {
         var title = "Send"
         if selectedIndexs.count > 0 {
             title = String(format: "Send(%d)", selectedIndexs.count)
+            sendBtn.backgroundColor = UIColor(hex:0x9256ff)
+        } else {
+            sendBtn.backgroundColor = UIColor(hex: 0xc7c7cc)
         }
         sendBtn.setTitle(title, for: .normal)
         
@@ -121,6 +125,7 @@ class LPPhotoSelectVC: UIViewController {
             }
         }
         
+        sendBtn.isEnabled = selectedIndexs.count > 0
         collectionView.reloadData()
     }
 }
@@ -178,9 +183,13 @@ extension LPPhotoSelectVC: LPPhotoSelectCellDelegate {
         
         var title = "Send"
         if selectedIndexs.count > 0 {
+            sendBtn.backgroundColor = UIColor(hex:0x9256ff)
             title = String(format: "Send(%d)", selectedIndexs.count)
+        } else {
+            sendBtn.backgroundColor = UIColor(hex: 0xc7c7cc)
         }
         sendBtn.setTitle(title, for: .normal)
+        sendBtn.isEnabled = selectedIndexs.count > 0
         
         if selectedIndexs.count == 5 { // 全部置灰
             for model in dataSource {
