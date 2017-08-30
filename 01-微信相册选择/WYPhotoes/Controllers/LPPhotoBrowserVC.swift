@@ -10,6 +10,7 @@ import UIKit
 
 class LPPhotoBrowserVC: UIViewController {
     
+    var backBtnClickBlock: ((_ selectedIndexs: [Int])->())?
     let LPBrowserCellId = "LPBrowserCell"
     var selectedIndexs = [Int]()
     var currentIndex = 0
@@ -91,15 +92,11 @@ class LPPhotoBrowserVC: UIViewController {
         let sendBtn = UIButton(frame: CGRect(x: view.bounds.width - 109, y: 8.5, width: 77, height: 28))
         sendBtn.backgroundColor = UIColor(hex:0x9256ff)
         sendBtn.addTarget(self, action: #selector(sendBtnClick), for: .touchUpInside)
-        var title = "Send"
-        if selectedIndexs.count > 0 {
-            title = String(format: "Send(%d)", selectedIndexs.count)
-        }
-        sendBtn.setTitle(title, for: .normal)
         sendBtn.clipsToBounds = true
         sendBtn.layer.cornerRadius = 14
         sendBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
         self.sendBtn = sendBtn
+        handleSendBtn()
         
         bottomView.addSubview(sendBtn)
         view.addSubview(bottomView)
@@ -123,6 +120,7 @@ class LPPhotoBrowserVC: UIViewController {
     
     @IBAction func leftBtnClick() {
         navigationController?.popViewController(animated: true)
+        backBtnClickBlock?(selectedIndexs)
     }
     
     @IBAction func rightBtnClick() {
@@ -144,6 +142,15 @@ class LPPhotoBrowserVC: UIViewController {
         rightIcon.isSelected = !rightIcon.isSelected
         currentModel.isSelected = rightIcon.isSelected
         collectionView.reloadItems(at: [IndexPath(item: currentIndex - 1, section: 0)])
+        handleSendBtn()
+    }
+    
+    private func handleSendBtn() {
+        var title = "Send"
+        if selectedIndexs.count > 0 {
+            title = String(format: "Send(%d)", selectedIndexs.count)
+        }
+        sendBtn.setTitle(title, for: .normal)
     }
 }
 
@@ -162,9 +169,8 @@ extension LPPhotoBrowserVC: UICollectionViewDataSource, UICollectionViewDelegate
     
     // MARK: - UICollectionViewDelegate
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let x = scrollView.contentOffset.x / view.bounds.width
+        let x = scrollView.contentOffset.x / (UIScreen.main.bounds.width + 20)
         currentIndex = Int(x) + 1
-        
         let currentModel = dataSource[currentIndex - 1]
         rightIcon.isSelected = currentModel.isSelected
     }

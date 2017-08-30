@@ -28,7 +28,7 @@ class LPPhotoSelectVC: UIViewController {
     var selectedIndexs = [Int]()
     let LPPhotoSelectCellId = "LPPhotoSelectCell"
     
-    fileprivate lazy var collectionView: UICollectionView = {
+    lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = self.thumbSize
         layout.minimumLineSpacing = 1
@@ -99,6 +99,27 @@ class LPPhotoSelectVC: UIViewController {
         
         nav.lpdelegate.imagePickerController(nav, didFinishPickingMediaWithInfo: images)
     }
+    
+    func updateUIAfterSelected() {
+
+        var title = "Send"
+        if selectedIndexs.count > 0 {
+            title = String(format: "Send(%d)", selectedIndexs.count)
+        }
+        sendBtn.setTitle(title, for: .normal)
+        
+        if selectedIndexs.count == 5 { // 全部置灰
+            for model in dataSource {
+                model.isShowCover = true
+            }
+            collectionView.reloadData()
+        } else if selectedIndexs.count == 4 && dataSource.last?.isShowCover ?? false { // 取消置灰
+            for model in dataSource {
+                model.isShowCover = false
+            }
+            collectionView.reloadData()
+        }
+    }
 }
 
 extension LPPhotoSelectVC: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -120,7 +141,7 @@ extension LPPhotoSelectVC: UICollectionViewDataSource, UICollectionViewDelegate 
     // MARK: - UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let model = dataSource[indexPath.item]
-        guard !model.isShowCover else {
+        if model.isShowCover && !model.isSelected {
             return
         }
         
@@ -128,6 +149,11 @@ extension LPPhotoSelectVC: UICollectionViewDataSource, UICollectionViewDelegate 
         browserVC.models = dataSource
         browserVC.selectedIndexs = selectedIndexs
         browserVC.currentIndex = indexPath.item
+        
+        browserVC.backBtnClickBlock = { [unowned self] selectedIndexs in
+            self.selectedIndexs = selectedIndexs
+            self.updateUIAfterSelected()
+        }
         
         navigationController?.pushViewController(browserVC, animated: true)
     }
@@ -146,6 +172,7 @@ extension LPPhotoSelectVC: LPPhotoSelectCellDelegate {
         
         let model = dataSource[index]
         model.isSelected = isAdd
+        
         var title = "Send"
         if selectedIndexs.count > 0 {
             title = String(format: "Send(%d)", selectedIndexs.count)
