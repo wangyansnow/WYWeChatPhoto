@@ -23,9 +23,11 @@ class LPPhotoSelectCell: UICollectionViewCell {
                 rightView.isHidden = true
                 iconView.image = UIImage(named: "image_camera")
                 coverView.isHidden = true
+                cameraView.isHidden = false
                 return
             }
             
+            cameraView.isHidden = true
             rightView.isHidden = false
             self.iconView.image = model?.thumbImage
             if model?.isSelected ?? false {
@@ -42,6 +44,7 @@ class LPPhotoSelectCell: UICollectionViewCell {
     @IBOutlet weak var rightView: UIView!
     @IBOutlet weak var selectedBtn: UIButton!
     @IBOutlet weak var coverView: UIView!
+    @IBOutlet weak var cameraView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

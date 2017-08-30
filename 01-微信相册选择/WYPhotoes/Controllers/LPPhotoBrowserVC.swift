@@ -88,7 +88,6 @@ class LPPhotoBrowserVC: UIViewController {
         let navView = Bundle.main.loadNibNamed("LPPhotoNavView", owner: self, options: nil)?.first as! UIView
         navView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 64)
         view.addSubview(navView)
-        
     }
     
     private func prepareBottomSelectView() {

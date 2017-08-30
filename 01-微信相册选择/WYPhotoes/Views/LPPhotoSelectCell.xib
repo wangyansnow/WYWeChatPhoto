@@ -53,22 +53,47 @@
                             <constraint firstItem="fAH-Wb-uRD" firstAttribute="top" secondItem="mrl-MU-MR8" secondAttribute="top" constant="7" id="tnI-dV-pq0"/>
                         </constraints>
                     </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eGk-Tp-m0L" userLabel="cameraView">
+                        <rect key="frame" x="0.0" y="0.0" width="120" height="100"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera_background" translatesAutoresizingMaskIntoConstraints="NO" id="0zF-6w-KPT">
+                                <rect key="frame" x="0.0" y="0.0" width="120" height="100"/>
+                            </imageView>
+                            <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" image="photo_CR_ic" translatesAutoresizingMaskIntoConstraints="NO" id="iqp-Ec-bOX">
+                                <rect key="frame" x="42" y="32" width="36" height="36"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="0zF-6w-KPT" secondAttribute="trailing" id="HZH-5W-Keh"/>
+                            <constraint firstItem="0zF-6w-KPT" firstAttribute="leading" secondItem="eGk-Tp-m0L" secondAttribute="leading" id="NJN-z1-71h"/>
+                            <constraint firstItem="iqp-Ec-bOX" firstAttribute="centerX" secondItem="eGk-Tp-m0L" secondAttribute="centerX" id="RXB-3X-9c3"/>
+                            <constraint firstItem="0zF-6w-KPT" firstAttribute="top" secondItem="eGk-Tp-m0L" secondAttribute="top" id="TN1-aM-dr2"/>
+                            <constraint firstAttribute="bottom" secondItem="0zF-6w-KPT" secondAttribute="bottom" id="oZU-Wt-s7F"/>
+                            <constraint firstItem="iqp-Ec-bOX" firstAttribute="centerY" secondItem="eGk-Tp-m0L" secondAttribute="centerY" id="p0T-eL-CAB"/>
+                        </constraints>
+                    </view>
                 </subviews>
             </view>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="eGk-Tp-m0L" secondAttribute="bottom" id="7EJ-my-sgG"/>
                 <constraint firstItem="00V-Mz-ndi" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="7dJ-lh-YOa"/>
                 <constraint firstAttribute="trailing" secondItem="DJG-mm-wWn" secondAttribute="trailing" id="8Iy-df-oEt"/>
                 <constraint firstItem="00V-Mz-ndi" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="CYi-A6-map"/>
                 <constraint firstItem="DJG-mm-wWn" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="LXN-Cx-CE6"/>
                 <constraint firstItem="mrl-MU-MR8" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="McA-CG-acb"/>
+                <constraint firstItem="eGk-Tp-m0L" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="TA0-YA-TVI"/>
+                <constraint firstAttribute="trailing" secondItem="eGk-Tp-m0L" secondAttribute="trailing" id="b9e-nr-oSA"/>
                 <constraint firstItem="DJG-mm-wWn" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="cUO-nM-azZ"/>
                 <constraint firstAttribute="bottom" secondItem="00V-Mz-ndi" secondAttribute="bottom" id="g52-mo-l92"/>
                 <constraint firstAttribute="trailing" secondItem="mrl-MU-MR8" secondAttribute="trailing" id="i7p-6I-H6P"/>
                 <constraint firstAttribute="bottom" secondItem="DJG-mm-wWn" secondAttribute="bottom" id="mFd-Hl-WR7"/>
                 <constraint firstAttribute="trailing" secondItem="00V-Mz-ndi" secondAttribute="trailing" id="qQh-4w-XxX"/>
+                <constraint firstItem="eGk-Tp-m0L" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="y5X-3R-MKD"/>
             </constraints>
             <size key="customSize" width="120" height="100"/>
             <connections>
+                <outlet property="cameraView" destination="eGk-Tp-m0L" id="dzC-9S-jQR"/>
                 <outlet property="coverView" destination="00V-Mz-ndi" id="NKh-N0-r7N"/>
                 <outlet property="iconView" destination="DJG-mm-wWn" id="G4x-Tg-Rms"/>
                 <outlet property="rightView" destination="mrl-MU-MR8" id="zlM-5W-ScZ"/>
@@ -78,6 +103,8 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="camera_background" width="186" height="186"/>
+        <image name="photo_CR_ic" width="36" height="36"/>
         <image name="select_photo1_pre" width="19" height="19"/>
         <image name="select_photo_nor" width="19" height="19"/>
     </resources>
