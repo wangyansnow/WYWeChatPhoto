@@ -152,7 +152,7 @@
 				TargetAttributes = {
 					E35EF9381F556A500052F365 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = SX8PGCDPTD;
+						DevelopmentTeam = K775G7S2W4;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -325,8 +325,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = SX8PGCDPTD;
+				DEVELOPMENT_TEAM = K775G7S2W4;
 				INFOPLIST_FILE = "01-微信相册选择/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.snow.minyan.-1-------";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -338,8 +339,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = SX8PGCDPTD;
+				DEVELOPMENT_TEAM = K775G7S2W4;
 				INFOPLIST_FILE = "01-微信相册选择/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.snow.minyan.-1-------";
 				PRODUCT_NAME = "$(TARGET_NAME)";

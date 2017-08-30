@@ -56,15 +56,19 @@ extension LPGroupVC {
         cameraRoll.enumerateObjects({ (assetCollection, _, _) in
              let assets = PHAsset.fetchAssets(in: assetCollection, options: nil)
             self.groups.append(assetCollection)
-            print("name = \(assetCollection.localizedLocationNames), count = \(assets.count), title = \(assetCollection.localizedTitle ?? "没有名称")")
+            print("name = \(assetCollection.localizedLocationNames), count = \(assets.count), title = \(assetCollection.localizedTitle ?? "没有名称"), type = \(assetCollection.assetCollectionSubtype)")
         })
         
         // 2.其他所有相簿
         let screenshots = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumRegular, options: nil)
         screenshots.enumerateObjects({ (assetCollection, _, _) in
             
+            if assetCollection.localizedTitle == "VideoShow" || assetCollection.estimatedAssetCount == 0 {
+                print("视频不要")
+                return
+            }
             self.groups.append(assetCollection)
-            print("name = \(assetCollection.localizedLocationNames), count = \(assetCollection.estimatedAssetCount), title = \(assetCollection.localizedTitle ?? "没有名称")")
+            print("name = \(assetCollection.localizedLocationNames), count = \(assetCollection.estimatedAssetCount), title = \(assetCollection.localizedTitle ?? "没有名称"), type = \(assetCollection.assetCollectionSubtype)")
         })
         
         // 3.我的照片流
@@ -72,7 +76,7 @@ extension LPGroupVC {
         myPhotoStream.enumerateObjects({ (assetCollection, _, _) in
             
             self.groups.append(assetCollection)
-            print("name = \(assetCollection.localizedLocationNames), count = \(assetCollection.estimatedAssetCount), title = \(assetCollection.localizedTitle ?? "没有名称")")
+            print("name = \(assetCollection.localizedLocationNames), count = \(assetCollection.estimatedAssetCount), title = \(assetCollection.localizedTitle ?? "没有名称"), type = \(assetCollection.assetCollectionSubtype)")
         })
     }
 }
