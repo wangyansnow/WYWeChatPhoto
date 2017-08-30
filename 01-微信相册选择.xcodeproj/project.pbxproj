@@ -12,6 +12,7 @@
 		E31689D01F559FFC00D06D8C /* LPPhotoSelectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E31689CE1F559FFC00D06D8C /* LPPhotoSelectCell.xib */; };
 		E31689D21F55A5FA00D06D8C /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31689D11F55A5FA00D06D8C /* UIColor+Extension.swift */; };
 		E31689D41F55C11800D06D8C /* LPPhotoSelectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31689D31F55C11800D06D8C /* LPPhotoSelectModel.swift */; };
+		E31689D61F55CCBA00D06D8C /* LPPhotoBrowserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31689D51F55CCBA00D06D8C /* LPPhotoBrowserVC.swift */; };
 		E35EF93D1F556A500052F365 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35EF93C1F556A500052F365 /* AppDelegate.swift */; };
 		E35EF93F1F556A500052F365 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35EF93E1F556A500052F365 /* ViewController.swift */; };
 		E35EF9421F556A500052F365 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E35EF9401F556A500052F365 /* Main.storyboard */; };
@@ -27,6 +28,7 @@
 		E31689CE1F559FFC00D06D8C /* LPPhotoSelectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LPPhotoSelectCell.xib; sourceTree = "<group>"; };
 		E31689D11F55A5FA00D06D8C /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		E31689D31F55C11800D06D8C /* LPPhotoSelectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LPPhotoSelectModel.swift; sourceTree = "<group>"; };
+		E31689D51F55CCBA00D06D8C /* LPPhotoBrowserVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LPPhotoBrowserVC.swift; sourceTree = "<group>"; };
 		E35EF9391F556A500052F365 /* 01-微信相册选择.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "01-微信相册选择.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E35EF93C1F556A500052F365 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E35EF93E1F556A500052F365 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				E35EF9521F556C910052F365 /* LPImagePickerController.swift */,
 				E35EF9541F556E460052F365 /* LPGroupVC.swift */,
 				E31689CB1F559C5F00D06D8C /* LPPhotoSelectVC.swift */,
+				E31689D51F55CCBA00D06D8C /* LPPhotoBrowserVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 				E31689D21F55A5FA00D06D8C /* UIColor+Extension.swift in Sources */,
 				E31689CC1F559C5F00D06D8C /* LPPhotoSelectVC.swift in Sources */,
 				E31689D41F55C11800D06D8C /* LPPhotoSelectModel.swift in Sources */,
+				E31689D61F55CCBA00D06D8C /* LPPhotoBrowserVC.swift in Sources */,
 				E35EF9551F556E460052F365 /* LPGroupVC.swift in Sources */,
 				E31689CF1F559FFC00D06D8C /* LPPhotoSelectCell.swift in Sources */,
 				E35EF93F1F556A500052F365 /* ViewController.swift in Sources */,
