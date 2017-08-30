@@ -17,6 +17,9 @@
 		E31689DA1F567CA900D06D8C /* LPPhotoNavView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E31689D91F567CA900D06D8C /* LPPhotoNavView.xib */; };
 		E31689DD1F56851100D06D8C /* LPBrowserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31689DB1F56851100D06D8C /* LPBrowserCell.swift */; };
 		E31689DE1F56851100D06D8C /* LPBrowserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E31689DC1F56851100D06D8C /* LPBrowserCell.xib */; };
+		E31689E01F569A9B00D06D8C /* LPThumbSelectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31689DF1F569A9B00D06D8C /* LPThumbSelectedView.swift */; };
+		E31689E31F569BF300D06D8C /* LPThumbSelectedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31689E11F569BF300D06D8C /* LPThumbSelectedCell.swift */; };
+		E31689E41F569BF300D06D8C /* LPThumbSelectedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E31689E21F569BF300D06D8C /* LPThumbSelectedCell.xib */; };
 		E35EF93D1F556A500052F365 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35EF93C1F556A500052F365 /* AppDelegate.swift */; };
 		E35EF93F1F556A500052F365 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35EF93E1F556A500052F365 /* ViewController.swift */; };
 		E35EF9421F556A500052F365 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E35EF9401F556A500052F365 /* Main.storyboard */; };
@@ -37,6 +40,9 @@
 		E31689D91F567CA900D06D8C /* LPPhotoNavView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LPPhotoNavView.xib; sourceTree = "<group>"; };
 		E31689DB1F56851100D06D8C /* LPBrowserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LPBrowserCell.swift; sourceTree = "<group>"; };
 		E31689DC1F56851100D06D8C /* LPBrowserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LPBrowserCell.xib; sourceTree = "<group>"; };
+		E31689DF1F569A9B00D06D8C /* LPThumbSelectedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LPThumbSelectedView.swift; sourceTree = "<group>"; };
+		E31689E11F569BF300D06D8C /* LPThumbSelectedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LPThumbSelectedCell.swift; sourceTree = "<group>"; };
+		E31689E21F569BF300D06D8C /* LPThumbSelectedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LPThumbSelectedCell.xib; sourceTree = "<group>"; };
 		E35EF9391F556A500052F365 /* 01-微信相册选择.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "01-微信相册选择.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E35EF93C1F556A500052F365 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E35EF93E1F556A500052F365 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -128,6 +134,9 @@
 				E31689D91F567CA900D06D8C /* LPPhotoNavView.xib */,
 				E31689DB1F56851100D06D8C /* LPBrowserCell.swift */,
 				E31689DC1F56851100D06D8C /* LPBrowserCell.xib */,
+				E31689DF1F569A9B00D06D8C /* LPThumbSelectedView.swift */,
+				E31689E11F569BF300D06D8C /* LPThumbSelectedCell.swift */,
+				E31689E21F569BF300D06D8C /* LPThumbSelectedCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -192,6 +201,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E31689E41F569BF300D06D8C /* LPThumbSelectedCell.xib in Resources */,
 				E31689D01F559FFC00D06D8C /* LPPhotoSelectCell.xib in Resources */,
 				E35EF9471F556A500052F365 /* LaunchScreen.storyboard in Resources */,
 				E31689DE1F56851100D06D8C /* LPBrowserCell.xib in Resources */,
@@ -213,9 +223,11 @@
 				E31689D41F55C11800D06D8C /* LPPhotoSelectModel.swift in Sources */,
 				E31689D61F55CCBA00D06D8C /* LPPhotoBrowserVC.swift in Sources */,
 				E35EF9551F556E460052F365 /* LPGroupVC.swift in Sources */,
+				E31689E31F569BF300D06D8C /* LPThumbSelectedCell.swift in Sources */,
 				E31689DD1F56851100D06D8C /* LPBrowserCell.swift in Sources */,
 				E31689CF1F559FFC00D06D8C /* LPPhotoSelectCell.swift in Sources */,
 				E35EF93F1F556A500052F365 /* ViewController.swift in Sources */,
+				E31689E01F569A9B00D06D8C /* LPThumbSelectedView.swift in Sources */,
 				E31689D81F567C9D00D06D8C /* LPPhotoNavView.swift in Sources */,
 				E35EF93D1F556A500052F365 /* AppDelegate.swift in Sources */,
 				E35EF9531F556C910052F365 /* LPImagePickerController.swift in Sources */,

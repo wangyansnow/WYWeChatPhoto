@@ -28,6 +28,7 @@ class LPPhotoBrowserVC: UIViewController {
     @IBOutlet weak var rightIcon: UIButton!
     private weak var sendBtn: UIButton!
     weak var collectionView: UICollectionView!
+    weak var bottomSelectedView: LPThumbSelectedView!
     
     // MARK: - lifecycle
     override func viewWillAppear(_ animated: Bool) {
@@ -83,7 +84,18 @@ class LPPhotoBrowserVC: UIViewController {
     }
     
     private func prepareBottomSelectView() {
+        let selectedView = LPThumbSelectedView(frame: CGRect(x: 0, y: view.bounds.height - 118, width: UIScreen.main.bounds.width, height: 72))
+        bottomSelectedView = selectedView
+        bottomSelectedView.selectedIndexs = selectedIndexs
+        bottomSelectedView.backgroundColor = .orange
         
+        var ds = [LPPhotoSelectModel]()
+        for i in selectedIndexs {
+            ds.append(dataSource[i - 1])
+        }
+        bottomSelectedView.dataSource = ds
+        
+        view.addSubview(selectedView)
     }
     
     private func prepareSendView() {

@@ -37,6 +37,19 @@ class LPPhotoSelectModel: NSObject {
         }
     }
     
+    var thumbSelectedImage: UIImage? {
+        get {
+            let options = PHImageRequestOptions()
+            options.isSynchronous = true
+            
+            var img: UIImage?
+            PHImageManager.default().requestImage(for: asset!, targetSize: CGSize(width: 66, height: 66), contentMode: .default, options: options) { (image, _) in
+                img = image
+            }
+            return img
+        }
+    }
+    
     class func handleAssets(assets: PHFetchResult<PHAsset>, size: CGSize) -> [LPPhotoSelectModel] {
         var models = [LPPhotoSelectModel]()
         let cameraModel = LPPhotoSelectModel()
