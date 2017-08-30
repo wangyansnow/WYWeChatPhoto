@@ -13,8 +13,28 @@ class LPPhotoSelectVC: UIViewController {
 
     var assets: PHFetchResult<PHAsset>! {
         didSet {
-            self.dataSource = LPPhotoSelectModel.handleAssets(assets: assets, size: thumbSize)
-            collectionView.reloadData()
+            handleAssets()
+        }
+    }
+    
+    func handleAssets() {
+        DispatchQueue.global().async {
+            var models = [LPPhotoSelectModel]()
+            let cameraModel = LPPhotoSelectModel()
+            cameraModel.isCamera = true
+            models.append(cameraModel)
+            
+            self.assets.enumerateObjects({ (asset, _, _) in
+                let model = LPPhotoSelectModel()
+                model.thumbSize = self.thumbSize
+                model.asset = asset
+                models.append(model)
+                
+                DispatchQueue.main.async {
+                    self.dataSource = models
+                    self.collectionView.reloadData()
+                }
+            })
         }
     }
     
@@ -34,7 +54,7 @@ class LPPhotoSelectVC: UIViewController {
         layout.minimumLineSpacing = 1
         layout.minimumInteritemSpacing = 1
         
-        let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height - 46 - 64), collectionViewLayout: layout)
+        let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height - 46), collectionViewLayout: layout)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = .white

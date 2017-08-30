@@ -7,13 +7,16 @@
 //
 
 import UIKit
+import Photos
 
 class LPBrowserCell: UICollectionViewCell {
     
     @IBOutlet private weak var iconView: UIImageView!
     var model: LPPhotoSelectModel! {
         didSet {
-            setIcon()
+            PHImageManager.default().requestImage(for: model.asset!, targetSize: PHImageManagerMaximumSize, contentMode: .default, options: nil) { (image, _) in
+                self.setIcon(img: image)
+            }
         }
     }
 
@@ -22,9 +25,9 @@ class LPBrowserCell: UICollectionViewCell {
 
     }
     
-    private func setIcon() {
+    private func setIcon(img: UIImage?) {
         let width = UIScreen.main.bounds.width
-        guard let image = model.browserImage else {
+        guard let image = img else {
             return
         }
         let h = width / image.size.width * image.size.height

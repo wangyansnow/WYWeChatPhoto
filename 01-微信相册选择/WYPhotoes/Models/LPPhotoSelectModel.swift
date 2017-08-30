@@ -10,18 +10,20 @@ import UIKit
 import Photos
 
 class LPPhotoSelectModel: NSObject {
-    var asset: PHAsset? {
-        didSet {
+    var asset: PHAsset?
+    var isSelected = false
+    var thumbSize = CGSize.zero
+    var thumbImage: UIImage? {
+        get {
             let options = PHImageRequestOptions()
             options.isSynchronous = true
+            var img: UIImage?
             PHImageManager.default().requestImage(for: asset!, targetSize: thumbSize, contentMode: .aspectFill, options: options) { (image, _) in
-                self.thumbImage = image
+                img = image
             }
+            return img
         }
     }
-    var isSelected = false
-    var thumbImage: UIImage?
-    var thumbSize = CGSize.zero
     var browserSize = CGSize.zero
     var isCamera = false
     var isShowCover = false
