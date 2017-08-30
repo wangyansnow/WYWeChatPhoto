@@ -63,7 +63,7 @@ class LPPhotoSelectVC: UIViewController {
     }
     
     private func prepareNavigationBar() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(cancelItemClick))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelItemClick))
     }
     
     private func prepareBottomView() {

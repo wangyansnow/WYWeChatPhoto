@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="KGk-i7-Jjw" customClass="LPGroupCell" customModule="_1_微信相册选择" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="333" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="333" height="59.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j66-rm-8dg">
+                        <rect key="frame" x="0.0" y="0.0" width="60" height="59.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="9N1-iy-ZwO"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera Roll" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p24-rQ-LXS">
+                        <rect key="frame" x="76" y="20.5" width="82.5" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(1280)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6K1-hf-wbK">
+                        <rect key="frame" x="164.5" y="19" width="50" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Disclosure Indicator" translatesAutoresizingMaskIntoConstraints="NO" id="vfP-9O-NO6">
+                        <rect key="frame" x="310" y="22.5" width="8" height="13"/>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Auw-na-8if" userLabel="lineView">
+                        <rect key="frame" x="60" y="59" width="273" height="0.5"/>
+                        <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="jcu-mU-GxL"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="6K1-hf-wbK" firstAttribute="leading" secondItem="p24-rQ-LXS" secondAttribute="trailing" constant="6" id="32X-Jy-rN5"/>
+                    <constraint firstItem="p24-rQ-LXS" firstAttribute="leading" secondItem="j66-rm-8dg" secondAttribute="trailing" constant="16" id="8rU-Qb-Du8"/>
+                    <constraint firstAttribute="bottom" secondItem="Auw-na-8if" secondAttribute="bottom" id="DDb-YT-zQx"/>
+                    <constraint firstItem="vfP-9O-NO6" firstAttribute="centerY" secondItem="p24-rQ-LXS" secondAttribute="centerY" id="E7D-9z-7EG"/>
+                    <constraint firstAttribute="trailing" secondItem="vfP-9O-NO6" secondAttribute="trailing" constant="15" id="IYv-wU-IgK"/>
+                    <constraint firstItem="p24-rQ-LXS" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Kcg-c2-Gkc"/>
+                    <constraint firstAttribute="trailing" secondItem="Auw-na-8if" secondAttribute="trailing" id="Qtr-RU-OSK"/>
+                    <constraint firstItem="6K1-hf-wbK" firstAttribute="centerY" secondItem="p24-rQ-LXS" secondAttribute="centerY" id="fbZ-jE-ACA"/>
+                    <constraint firstItem="j66-rm-8dg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="kH8-ac-GVE"/>
+                    <constraint firstAttribute="bottom" secondItem="j66-rm-8dg" secondAttribute="bottom" id="taw-1U-HcP"/>
+                    <constraint firstItem="Auw-na-8if" firstAttribute="leading" secondItem="j66-rm-8dg" secondAttribute="trailing" id="u15-dg-6Dx"/>
+                    <constraint firstItem="j66-rm-8dg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="vt1-Ap-VvM"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="countLabel" destination="6K1-hf-wbK" id="957-Ik-2qQ"/>
+                <outlet property="iconView" destination="j66-rm-8dg" id="VXg-kx-XiJ"/>
+                <outlet property="nameLabel" destination="p24-rQ-LXS" id="9nU-WG-SsW"/>
+            </connections>
+            <point key="canvasLocation" x="25.5" y="6"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Disclosure Indicator" width="8" height="13"/>
+    </resources>
+</document>

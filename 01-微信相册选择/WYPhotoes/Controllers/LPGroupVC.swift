@@ -11,12 +11,9 @@ import Photos
 
 class LPGroupVC: UIViewController {
 
-    var groups = [PHAssetCollection]()
-    fileprivate lazy var fetchOption: PHFetchOptions = {
-        let fetchOption = PHFetchOptions()
-        fetchOption.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        return fetchOption
-    }()
+    var dataSource: [LPGroupModel]?
+    let LPGroupCellId = "LPGroupCell"
+    weak var tableView: UITableView!
     
     deinit {
         print("LPGroupVC")
@@ -29,61 +26,72 @@ class LPGroupVC: UIViewController {
     }
 
     private func setupUI() {
+        dataSource = LPGroupModel.getPhotoGroups()
         setupNavBar()
-        getPhotoGroup()
         pushMyPhotoStream()
+        prepareTableView()
+        
+    }
+    
+    private func prepareTableView() {
+        let tableV = UITableView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height - 64), style: .plain)
+        tableView = tableV
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.rowHeight = 60
+        tableView.tableFooterView = UIView()
+        tableView.register(UINib(nibName: LPGroupCellId, bundle: nil), forCellReuseIdentifier: LPGroupCellId)
+        
+        view.addSubview(tableV)
     }
     
     private func pushMyPhotoStream() {
-        let photoSelectVC = LPPhotoSelectVC()
-        photoSelectVC.assets = PHAsset.fetchAssets(in: groups.last!, options: nil)
-        photoSelectVC.title = groups.last?.localizedTitle
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .done, target: nil, action: nil)
-        navigationController?.pushViewController(photoSelectVC, animated: false)
+        guard let firstGroup = dataSource?.first else {
+            return
+        }
+        
+        push(group: firstGroup, animate: false)
     }
     
     private func setupNavBar() {
         title = "Photos"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(cancelItemClick))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelItemClick))
     }
     
     @objc private func cancelItemClick() {
         navigationController?.dismiss(animated: true, completion: nil)
     }
+    
+    func push(group: LPGroupModel, animate: Bool) {
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        
+        let photoSelectVC = LPPhotoSelectVC()
+        photoSelectVC.assets = PHAsset.fetchAssets(in: group.assetCollection, options: fetchOptions)
+        photoSelectVC.title = group.name
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .done, target: nil, action: nil)
+        navigationController?.pushViewController(photoSelectVC, animated: animate)
+    }    
 }
 
-extension LPGroupVC {
+extension LPGroupVC: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataSource?.count ?? 0
+    }
     
-    fileprivate func getPhotoGroup() {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: LPGroupCellId) as! LPGroupCell
+        cell.group = dataSource![indexPath.item]
         
-        // 1.相机胶卷
-        let cameraRoll = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumUserLibrary, options: nil)
-        cameraRoll.enumerateObjects({ (assetCollection, _, _) in
-             let assets = PHAsset.fetchAssets(in: assetCollection, options: nil)
-            self.groups.append(assetCollection)
-            print("name = \(assetCollection.localizedLocationNames), count = \(assets.count), title = \(assetCollection.localizedTitle ?? "没有名称"), type = \(assetCollection.assetCollectionSubtype)")
-        })
-        
-        // 2.其他所有相簿
-        let screenshots = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumRegular, options: nil)
-        screenshots.enumerateObjects({ (assetCollection, _, _) in
-            
-            if assetCollection.localizedTitle == "VideoShow" || assetCollection.estimatedAssetCount == 0 {
-                print("视频不要")
-                return
-            }
-            self.groups.append(assetCollection)
-            print("name = \(assetCollection.localizedLocationNames), count = \(assetCollection.estimatedAssetCount), title = \(assetCollection.localizedTitle ?? "没有名称"), type = \(assetCollection.assetCollectionSubtype)")
-        })
-        
-        // 3.我的照片流
-        let myPhotoStream = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .albumMyPhotoStream, options: nil)
-        myPhotoStream.enumerateObjects({ (assetCollection, _, _) in
-            
-            self.groups.append(assetCollection)
-            print("name = \(assetCollection.localizedLocationNames), count = \(assetCollection.estimatedAssetCount), title = \(assetCollection.localizedTitle ?? "没有名称"), type = \(assetCollection.assetCollectionSubtype)")
-        })
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let group = dataSource![indexPath.item]
+        push(group: group, animate: true)
     }
 }
+
 
 

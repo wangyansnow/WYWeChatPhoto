@@ -61,6 +61,9 @@ class LPPhotoBrowserVC: UIViewController {
         let model = dataSource[currentIndex - 1]
         rightIcon.isSelected = model.isSelected
         automaticallyAdjustsScrollViewInsets = false
+        
+        let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: view.bounds.height))
+        view.insertSubview(leftView, aboveSubview: collectionView)
     }
     
     private func prepareCollectionView() {
