@@ -45,6 +45,9 @@ class LPPhotoSelectVC: UIViewController {
         return collectionView
     }()
     
+    deinit {
+        print("LPPhotoSelectVC")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,7 +85,7 @@ class LPPhotoSelectVC: UIViewController {
         navigationController?.dismiss(animated: true, completion: nil)
         
         let nav = navigationController as! LPImagePickerController
-        nav.lpdelegate.imagePickerControllerDidCancel?(nav)
+        nav.lpdelegate?.imagePickerControllerDidCancel?(nav)
     }
     
     @objc private func sendBtnClick() {
@@ -97,7 +100,7 @@ class LPPhotoSelectVC: UIViewController {
             }
         }
         
-        nav.lpdelegate.imagePickerController(nav, didFinishPickingMediaWithInfo: images)
+        nav.lpdelegate?.imagePickerController(nav, didFinishPickingMediaWithInfo: images)
     }
     
     func updateUIAfterSelected() {

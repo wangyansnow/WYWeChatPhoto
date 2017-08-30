@@ -9,13 +9,13 @@
 import UIKit
 import Photos
 
-protocol LPPhotoSelectCellDelegate {
+protocol LPPhotoSelectCellDelegate: class {
     func  photoSelectCellSelected(cell: LPPhotoSelectCell, index: Int, isAdd: Bool)
 }
 
 class LPPhotoSelectCell: UICollectionViewCell {
 
-    var delegate: LPPhotoSelectCellDelegate?
+    weak var delegate: LPPhotoSelectCellDelegate?
     var index: Int = 0
     var model: LPPhotoSelectModel? {
         didSet {

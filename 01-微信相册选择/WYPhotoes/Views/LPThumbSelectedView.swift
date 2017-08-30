@@ -10,12 +10,14 @@ import UIKit
 
 class LPThumbSelectedView: UIView {
     
+    var itemClickBlock: ((_ clickIndex: Int) -> ())?
     var selectedIndexs = [Int]()
     var dataSource = [LPPhotoSelectModel]() {
         didSet {
             collectionView.reloadData()
         }
     }
+    weak var selectedCell: LPThumbSelectedCell?
     
     let LPThumbSelectedCellId = "LPThumbSelectedCell"
     private lazy var collectionView: UICollectionView = {
@@ -32,6 +34,10 @@ class LPThumbSelectedView: UIView {
         self.addSubview(collectionView)
         return collectionView
     }()
+    
+    deinit {
+        print("LPThumbSelectedView")
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -41,7 +47,42 @@ class LPThumbSelectedView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func changeToIndex(index: Int) {
+        guard let i = selectedIndexs.index(of: index) else {
+            selectedCell?.updateSelectUI(isSelected: false)
+            selectedCell = nil
+            return
+        }
+        
+        guard let cell = collectionView.cellForItem(at: IndexPath(item: i, section: 0)) as? LPThumbSelectedCell else {
+            return
+        }
+        selectedCell?.updateSelectUI(isSelected: false)
+        cell.updateSelectUI(isSelected: true)
+        selectedCell = cell
+    }
 
+    func addOrDelete(index: Int, isAdd: Bool, model: LPPhotoSelectModel) {
+        if isAdd {
+            selectedIndexs.append(index)
+            dataSource.append(model)
+            collectionView.reloadData()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: { 
+                self.changeToIndex(index: index)
+            })
+            return
+        }
+        
+        guard let i = selectedIndexs.index(of: index) else {
+            return
+        }
+        selectedIndexs.remove(at: i)
+        dataSource.remove(at: i)
+        selectedCell?.updateSelectUI(isSelected: false)
+        selectedCell = nil
+        collectionView.reloadData()
+    }
 }
 
 extension LPThumbSelectedView: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -57,6 +98,13 @@ extension LPThumbSelectedView: UICollectionViewDataSource, UICollectionViewDeleg
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        itemClickBlock?(selectedIndexs[indexPath.item])
         
+        guard let cell = collectionView.cellForItem(at: indexPath) as? LPThumbSelectedCell else {
+            return
+        }
+        cell.updateSelectUI(isSelected: true)
+        selectedCell?.updateSelectUI(isSelected: false)
+        selectedCell = cell
     }
 }

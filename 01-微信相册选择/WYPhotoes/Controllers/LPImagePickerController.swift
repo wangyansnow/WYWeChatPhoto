@@ -16,7 +16,7 @@ import UIKit
 
 class LPImagePickerController: UINavigationController {
     
-    let lpdelegate: LPImagePickerControllerDelegate
+    weak var lpdelegate: LPImagePickerControllerDelegate?
     init(delegate: LPImagePickerControllerDelegate) {
         lpdelegate = delegate
         super.init(nibName: nil, bundle: nil)
@@ -38,13 +38,9 @@ class LPImagePickerController: UINavigationController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
-    }
-    
-    // MARK: - lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
-    
+    }    
 
+    deinit {
+        print("LPImagePickerController")
+    }
 }

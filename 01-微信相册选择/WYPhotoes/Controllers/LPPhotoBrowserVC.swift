@@ -25,6 +25,10 @@ class LPPhotoBrowserVC: UIViewController {
         }
     }
     
+    deinit {
+        print("LPPhotoBrowserVC")
+    }
+    
     @IBOutlet weak var rightIcon: UIButton!
     private weak var sendBtn: UIButton!
     weak var collectionView: UICollectionView!
@@ -94,7 +98,15 @@ class LPPhotoBrowserVC: UIViewController {
             ds.append(dataSource[i - 1])
         }
         bottomSelectedView.dataSource = ds
+        bottomSelectedView.itemClickBlock = { [unowned self] clickIndex in
+            self.currentIndex = clickIndex
+            self.collectionView.scrollToItem(at: IndexPath(item: clickIndex - 1, section: 0), at: .left, animated: false)
+            self.rightIcon.isSelected = true
+        }
         
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { 
+            self.bottomSelectedView.changeToIndex(index: self.currentIndex)
+        }
         view.addSubview(selectedView)
     }
     
@@ -127,7 +139,7 @@ class LPPhotoBrowserVC: UIViewController {
             }
         }
         
-        nav.lpdelegate.imagePickerController(nav, didFinishPickingMediaWithInfo: images)
+        nav.lpdelegate?.imagePickerController(nav, didFinishPickingMediaWithInfo: images)
     }
     
     @IBAction func leftBtnClick() {
@@ -136,9 +148,11 @@ class LPPhotoBrowserVC: UIViewController {
     }
     
     @IBAction func rightBtnClick() {
+        let currentModel = dataSource[currentIndex - 1]
         if rightIcon.isSelected { // 取消选择
             if let i = selectedIndexs.index(of: currentIndex) {
                 selectedIndexs.remove(at: i)
+                bottomSelectedView.addOrDelete(index: currentIndex, isAdd: false, model: currentModel)
             }
             
         } else { // 新增选择
@@ -148,9 +162,9 @@ class LPPhotoBrowserVC: UIViewController {
             }
             
             selectedIndexs.append(currentIndex)
+            bottomSelectedView.addOrDelete(index: currentIndex, isAdd: true, model: currentModel)
         }
         
-        let currentModel = dataSource[currentIndex - 1]
         rightIcon.isSelected = !rightIcon.isSelected
         currentModel.isSelected = rightIcon.isSelected
         collectionView.reloadItems(at: [IndexPath(item: currentIndex - 1, section: 0)])
@@ -185,6 +199,9 @@ extension LPPhotoBrowserVC: UICollectionViewDataSource, UICollectionViewDelegate
         currentIndex = Int(x) + 1
         let currentModel = dataSource[currentIndex - 1]
         rightIcon.isSelected = currentModel.isSelected
+        
+        // 通知底部更换选中
+        bottomSelectedView.changeToIndex(index: currentIndex)
     }
     
 }

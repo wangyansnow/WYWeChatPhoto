@@ -28,7 +28,7 @@ class ViewController: UIViewController {
 
 extension ViewController: LPImagePickerControllerDelegate {
     func imagePickerControllerDidCancel(_ picker: LPImagePickerController) {
-        print("imagePickerControllerDidCancel")
+//        print("imagePickerControllerDidCancel")
     }
     
     func imagePickerController(_ picker: LPImagePickerController, didFinishPickingMediaWithInfo info: [UIImage]) {

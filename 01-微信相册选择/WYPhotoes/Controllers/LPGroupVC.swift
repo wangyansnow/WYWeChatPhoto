@@ -18,6 +18,10 @@ class LPGroupVC: UIViewController {
         return fetchOption
     }()
     
+    deinit {
+        print("LPGroupVC")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

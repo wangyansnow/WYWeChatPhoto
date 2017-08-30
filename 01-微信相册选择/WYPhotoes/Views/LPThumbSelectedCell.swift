@@ -20,4 +20,14 @@ class LPThumbSelectedCell: UICollectionViewCell {
     private func handleModel() {
         iconView.image = model.thumbSelectedImage
     }
+    
+    func updateSelectUI(isSelected: Bool) {
+        if isSelected {
+            layer.borderWidth = 2
+            layer.borderColor = UIColor(hex: 0x9652ff).cgColor
+            return
+        }
+        
+        layer.borderWidth = 0
+    }
 }
