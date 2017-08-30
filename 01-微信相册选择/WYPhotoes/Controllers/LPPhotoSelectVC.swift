@@ -80,10 +80,24 @@ class LPPhotoSelectVC: UIViewController {
     
     @objc private func cancelItemClick() {
         navigationController?.dismiss(animated: true, completion: nil)
+        
+        let nav = navigationController as! LPImagePickerController
+        nav.lpdelegate.imagePickerControllerDidCancel?(nav)
     }
     
     @objc private func sendBtnClick() {
+        let nav = navigationController as! LPImagePickerController
+        nav.dismiss(animated: true, completion: nil)
         
+        var images = [UIImage]()
+        for i in selectedIndexs {
+            let model = dataSource[i]
+            if let image = model.originImage {
+                images.append(image)
+            }
+        }
+        
+        nav.lpdelegate.imagePickerController(nav, didFinishPickingMediaWithInfo: images)
     }
 }
 

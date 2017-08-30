@@ -21,6 +21,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EL3-wX-2gO">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zvg-pI-fmG">
                                 <rect key="frame" x="53" y="168" width="75" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -31,7 +34,16 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="EL3-wX-2gO" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="4Ci-VL-jkj"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="EL3-wX-2gO" secondAttribute="bottom" id="azc-db-e9x"/>
+                            <constraint firstAttribute="trailing" secondItem="EL3-wX-2gO" secondAttribute="trailing" id="kmu-ik-auA"/>
+                            <constraint firstItem="EL3-wX-2gO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="mZy-LO-icc"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="imageView" destination="EL3-wX-2gO" id="FcT-n5-wJA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

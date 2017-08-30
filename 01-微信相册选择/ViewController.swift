@@ -9,6 +9,9 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    @IBOutlet weak var imageView: UIImageView!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,8 +21,18 @@ class ViewController: UIViewController {
     }
 
     @IBAction func selectPhotoBtnClick(_ sender: UIButton) {
-        present(LPImagePickerController(), animated: true, completion: nil)
+        present(LPImagePickerController(delegate: self), animated: true, completion: nil)
     }
 
+}
+
+extension ViewController: LPImagePickerControllerDelegate {
+    func imagePickerControllerDidCancel(_ picker: LPImagePickerController) {
+        print("imagePickerControllerDidCancel")
+    }
+    
+    func imagePickerController(_ picker: LPImagePickerController, didFinishPickingMediaWithInfo info: [UIImage]) {
+        self.imageView.image = info.last
+    }
 }
 

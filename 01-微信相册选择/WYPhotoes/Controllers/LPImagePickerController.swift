@@ -8,9 +8,17 @@
 
 import UIKit
 
+@objc protocol LPImagePickerControllerDelegate: class {
+    func imagePickerController(_ picker: LPImagePickerController, didFinishPickingMediaWithInfo info: [UIImage])
+    
+    @objc optional func imagePickerControllerDidCancel(_ picker: LPImagePickerController)
+}
+
 class LPImagePickerController: UINavigationController {
     
-    init() {
+    let lpdelegate: LPImagePickerControllerDelegate
+    init(delegate: LPImagePickerControllerDelegate) {
+        lpdelegate = delegate
         super.init(nibName: nil, bundle: nil)
         setupUI()
     }
