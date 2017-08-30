@@ -112,13 +112,13 @@ class LPPhotoSelectVC: UIViewController {
             for model in dataSource {
                 model.isShowCover = true
             }
-            collectionView.reloadData()
         } else if selectedIndexs.count == 4 && dataSource.last?.isShowCover ?? false { // 取消置灰
             for model in dataSource {
                 model.isShowCover = false
             }
-            collectionView.reloadData()
         }
+        
+        collectionView.reloadData()
     }
 }
 
