@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LPPhotoBrowserVC" customModule="_1_微信相册选择" customModuleProvider="target">
+            <connections>
+                <outlet property="rightIcon" destination="8cl-1h-2uR" id="HxL-E9-IeV"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="381" height="64"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app_bar_back_white" translatesAutoresizingMaskIntoConstraints="NO" id="rsq-mq-1c6">
+                    <rect key="frame" x="12" y="30" width="24" height="24"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8cl-1h-2uR">
+                    <rect key="frame" x="350" y="31" width="19" height="22"/>
+                    <state key="normal" image="select_photo_nor"/>
+                    <state key="selected" image="select_photo1_pre"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="euF-qO-96q" userLabel="leftBtn">
+                    <rect key="frame" x="0.0" y="0.0" width="60" height="64"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="XYp-qF-R0T"/>
+                    </constraints>
+                    <connections>
+                        <action selector="leftBtnClick" destination="-1" eventType="touchUpInside" id="7U3-zU-bYP"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HUa-7w-D2a" userLabel="rightBtn">
+                    <rect key="frame" x="321" y="0.0" width="60" height="64"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="SQP-sv-Q8Z"/>
+                    </constraints>
+                    <connections>
+                        <action selector="rightBtnClick" destination="-1" eventType="touchUpInside" id="Z9P-bB-1mX"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="euF-qO-96q" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="14n-24-6aH"/>
+                <constraint firstItem="rsq-mq-1c6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="8xV-p3-KMx"/>
+                <constraint firstAttribute="bottom" secondItem="euF-qO-96q" secondAttribute="bottom" id="Hev-mf-u27"/>
+                <constraint firstItem="8cl-1h-2uR" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="10" id="Mve-lF-Q7d"/>
+                <constraint firstItem="HUa-7w-D2a" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Niy-bK-yqO"/>
+                <constraint firstItem="euF-qO-96q" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="R6H-AU-Deo"/>
+                <constraint firstAttribute="trailing" secondItem="8cl-1h-2uR" secondAttribute="trailing" constant="12" id="SvO-D7-Wy7"/>
+                <constraint firstAttribute="trailing" secondItem="HUa-7w-D2a" secondAttribute="trailing" id="kgO-q3-adg"/>
+                <constraint firstAttribute="bottom" secondItem="HUa-7w-D2a" secondAttribute="bottom" id="rYf-I6-Xyh"/>
+                <constraint firstItem="rsq-mq-1c6" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="10" id="zdt-1p-0fl"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="24.5" y="-168"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="app_bar_back_white" width="24" height="24"/>
+        <image name="select_photo1_pre" width="19" height="19"/>
+        <image name="select_photo_nor" width="19" height="19"/>
+    </resources>
+</document>

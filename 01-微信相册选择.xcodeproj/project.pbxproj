@@ -13,6 +13,10 @@
 		E31689D21F55A5FA00D06D8C /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31689D11F55A5FA00D06D8C /* UIColor+Extension.swift */; };
 		E31689D41F55C11800D06D8C /* LPPhotoSelectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31689D31F55C11800D06D8C /* LPPhotoSelectModel.swift */; };
 		E31689D61F55CCBA00D06D8C /* LPPhotoBrowserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31689D51F55CCBA00D06D8C /* LPPhotoBrowserVC.swift */; };
+		E31689D81F567C9D00D06D8C /* LPPhotoNavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31689D71F567C9D00D06D8C /* LPPhotoNavView.swift */; };
+		E31689DA1F567CA900D06D8C /* LPPhotoNavView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E31689D91F567CA900D06D8C /* LPPhotoNavView.xib */; };
+		E31689DD1F56851100D06D8C /* LPBrowserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31689DB1F56851100D06D8C /* LPBrowserCell.swift */; };
+		E31689DE1F56851100D06D8C /* LPBrowserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E31689DC1F56851100D06D8C /* LPBrowserCell.xib */; };
 		E35EF93D1F556A500052F365 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35EF93C1F556A500052F365 /* AppDelegate.swift */; };
 		E35EF93F1F556A500052F365 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35EF93E1F556A500052F365 /* ViewController.swift */; };
 		E35EF9421F556A500052F365 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E35EF9401F556A500052F365 /* Main.storyboard */; };
@@ -29,6 +33,10 @@
 		E31689D11F55A5FA00D06D8C /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		E31689D31F55C11800D06D8C /* LPPhotoSelectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LPPhotoSelectModel.swift; sourceTree = "<group>"; };
 		E31689D51F55CCBA00D06D8C /* LPPhotoBrowserVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LPPhotoBrowserVC.swift; sourceTree = "<group>"; };
+		E31689D71F567C9D00D06D8C /* LPPhotoNavView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LPPhotoNavView.swift; sourceTree = "<group>"; };
+		E31689D91F567CA900D06D8C /* LPPhotoNavView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LPPhotoNavView.xib; sourceTree = "<group>"; };
+		E31689DB1F56851100D06D8C /* LPBrowserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LPBrowserCell.swift; sourceTree = "<group>"; };
+		E31689DC1F56851100D06D8C /* LPBrowserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LPBrowserCell.xib; sourceTree = "<group>"; };
 		E35EF9391F556A500052F365 /* 01-微信相册选择.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "01-微信相册选择.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E35EF93C1F556A500052F365 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E35EF93E1F556A500052F365 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -116,6 +124,10 @@
 			children = (
 				E31689CD1F559FFC00D06D8C /* LPPhotoSelectCell.swift */,
 				E31689CE1F559FFC00D06D8C /* LPPhotoSelectCell.xib */,
+				E31689D71F567C9D00D06D8C /* LPPhotoNavView.swift */,
+				E31689D91F567CA900D06D8C /* LPPhotoNavView.xib */,
+				E31689DB1F56851100D06D8C /* LPBrowserCell.swift */,
+				E31689DC1F56851100D06D8C /* LPBrowserCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -182,7 +194,9 @@
 			files = (
 				E31689D01F559FFC00D06D8C /* LPPhotoSelectCell.xib in Resources */,
 				E35EF9471F556A500052F365 /* LaunchScreen.storyboard in Resources */,
+				E31689DE1F56851100D06D8C /* LPBrowserCell.xib in Resources */,
 				E35EF9441F556A500052F365 /* Assets.xcassets in Resources */,
+				E31689DA1F567CA900D06D8C /* LPPhotoNavView.xib in Resources */,
 				E35EF9421F556A500052F365 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -199,8 +213,10 @@
 				E31689D41F55C11800D06D8C /* LPPhotoSelectModel.swift in Sources */,
 				E31689D61F55CCBA00D06D8C /* LPPhotoBrowserVC.swift in Sources */,
 				E35EF9551F556E460052F365 /* LPGroupVC.swift in Sources */,
+				E31689DD1F56851100D06D8C /* LPBrowserCell.swift in Sources */,
 				E31689CF1F559FFC00D06D8C /* LPPhotoSelectCell.swift in Sources */,
 				E35EF93F1F556A500052F365 /* ViewController.swift in Sources */,
+				E31689D81F567C9D00D06D8C /* LPPhotoNavView.swift in Sources */,
 				E35EF93D1F556A500052F365 /* AppDelegate.swift in Sources */,
 				E35EF9531F556C910052F365 /* LPImagePickerController.swift in Sources */,
 			);

@@ -119,7 +119,17 @@ extension LPPhotoSelectVC: UICollectionViewDataSource, UICollectionViewDelegate 
     
     // MARK: - UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let model = dataSource[indexPath.item]
+        guard !model.isShowCover else {
+            return
+        }
         
+        let browserVC = LPPhotoBrowserVC()
+        browserVC.models = dataSource
+        browserVC.selectedIndexs = selectedIndexs
+        browserVC.currentIndex = indexPath.item
+        
+        navigationController?.pushViewController(browserVC, animated: true)
     }
 }
 
