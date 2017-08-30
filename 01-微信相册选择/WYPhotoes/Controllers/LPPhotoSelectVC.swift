@@ -34,8 +34,7 @@ class LPPhotoSelectVC: UIViewController {
         layout.minimumLineSpacing = 1
         layout.minimumInteritemSpacing = 1
         
-        let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height - 46), collectionViewLayout: layout)
-        collectionView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
+        let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height - 46 - 64), collectionViewLayout: layout)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = .white
@@ -53,6 +52,7 @@ class LPPhotoSelectVC: UIViewController {
         super.viewDidLoad()
 
         setupUI()
+        automaticallyAdjustsScrollViewInsets = false
     }
     
     private func setupUI() {
@@ -67,7 +67,7 @@ class LPPhotoSelectVC: UIViewController {
     }
     
     private func prepareBottomView() {
-        let bottomView = UIView(frame: CGRect(x: 0, y: view.bounds.height - 46, width: view.bounds.width, height: 46))
+        let bottomView = UIView(frame: CGRect(x: 0, y: view.bounds.height - 46 - 64, width: view.bounds.width, height: 46))
         
         sendBtn = UIButton(frame: CGRect(x: view.bounds.width - 89, y: 8.5, width: 77, height: 28))
         sendBtn.backgroundColor = UIColor(hex: 0xc7c7cc)
@@ -148,7 +148,8 @@ extension LPPhotoSelectVC: UICollectionViewDataSource, UICollectionViewDelegate 
     
     // MARK: - UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard indexPath.item != 0 else {
+        guard indexPath.item != 0 else { // 选择了相机
+            openSystemCamera()
             return
         }
         
@@ -168,6 +169,28 @@ extension LPPhotoSelectVC: UICollectionViewDataSource, UICollectionViewDelegate 
         }
         
         navigationController?.pushViewController(browserVC, animated: true)
+    }
+    
+    private func openSystemCamera() {
+        let pickerVC = UIImagePickerController()
+        pickerVC.delegate = self
+        pickerVC.sourceType = .camera
+        
+        present(pickerVC, animated: true, completion: nil)
+    }
+}
+
+extension LPPhotoSelectVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        picker.dismiss(animated: false, completion: nil)
+        dismiss(animated: true, completion: nil)
+        let nav = navigationController as! LPImagePickerController
+        guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else {
+            nav.lpdelegate?.imagePickerControllerDidCancel?(nav)
+            return
+        }
+        nav.lpdelegate?.imagePickerController(nav, didFinishPickingMediaWithInfo: [image])
     }
 }
 

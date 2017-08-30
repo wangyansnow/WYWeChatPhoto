@@ -38,6 +38,7 @@ class LPGroupVC: UIViewController {
         let photoSelectVC = LPPhotoSelectVC()
         photoSelectVC.assets = PHAsset.fetchAssets(in: groups.last!, options: nil)
         photoSelectVC.title = groups.last?.localizedTitle
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .done, target: nil, action: nil)
         navigationController?.pushViewController(photoSelectVC, animated: false)
     }
     

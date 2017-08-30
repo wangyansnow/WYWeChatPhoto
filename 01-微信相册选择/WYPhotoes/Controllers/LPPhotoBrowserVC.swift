@@ -65,7 +65,6 @@ class LPPhotoBrowserVC: UIViewController {
     
     private func prepareCollectionView() {
         view.frame = CGRect(x: 0, y: 0, width: view.bounds.width + 20, height: view.bounds.height)
-        print("view.bounds = \(view.bounds)")
         
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0

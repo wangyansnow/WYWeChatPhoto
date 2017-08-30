@@ -29,16 +29,12 @@ class LPImagePickerController: UINavigationController {
     
     fileprivate func setupUI() {
         view.backgroundColor = .white
-        navigationBar.barTintColor = UIColor(white: 0, alpha: 0.7)
-        navigationBar.tintColor = .white
-        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        navigationBar.barTintColor = UIColor(hex: 0xeff0fa)
+        navigationBar.tintColor = UIColor(hex: 0x333333)
+        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor(hex: 0x333333)]
         setViewControllers([LPGroupVC()], animated: false)
-        navigationBar.isTranslucent = true
+        navigationBar.isTranslucent = false
     }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }    
 
     deinit {
         print("LPImagePickerController")
