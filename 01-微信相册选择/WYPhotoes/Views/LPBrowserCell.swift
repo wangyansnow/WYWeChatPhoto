@@ -24,7 +24,7 @@ class LPBrowserCell: UICollectionViewCell {
     
     private func setIcon() {
         let width = UIScreen.main.bounds.width
-        guard let image = model.originImage else {
+        guard let image = model.browserImage else {
             return
         }
         let h = width / image.size.width * image.size.height
@@ -33,6 +33,6 @@ class LPBrowserCell: UICollectionViewCell {
         iconView.image = image
         
         iconView.frame = CGRect(x: 0, y: y, width: width, height: h)
+        model.browserSize = CGSize(width: width, height: h)
     }
-
 }

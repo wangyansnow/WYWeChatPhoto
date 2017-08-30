@@ -29,6 +29,7 @@ class LPThumbSelectedView: UIView {
         let collectionView = UICollectionView(frame: self.bounds, collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.backgroundColor = .clear
         collectionView.register(UINib(nibName: self.LPThumbSelectedCellId, bundle: nil), forCellWithReuseIdentifier: self.LPThumbSelectedCellId)
         
         self.addSubview(collectionView)
@@ -65,6 +66,12 @@ class LPThumbSelectedView: UIView {
 
     func addOrDelete(index: Int, isAdd: Bool, model: LPPhotoSelectModel) {
         if isAdd {
+            if selectedIndexs.count == 0 { // 从无到有
+                UIView.animate(withDuration: 0.25, animations: { 
+                    self.alpha = 1.0
+                })
+            }
+            
             selectedIndexs.append(index)
             dataSource.append(model)
             collectionView.reloadData()
@@ -82,6 +89,12 @@ class LPThumbSelectedView: UIView {
         selectedCell?.updateSelectUI(isSelected: false)
         selectedCell = nil
         collectionView.reloadData()
+        
+        if selectedIndexs.count == 0 {
+            UIView.animate(withDuration: 0.25, animations: {
+                self.alpha = 0
+            })
+        }
     }
 }
 
@@ -94,6 +107,7 @@ extension LPThumbSelectedView: UICollectionViewDataSource, UICollectionViewDeleg
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LPThumbSelectedCellId, for: indexPath) as! LPThumbSelectedCell
         cell.model = dataSource[indexPath.item]
+        cell.backgroundColor = .clear
         return cell
     }
     

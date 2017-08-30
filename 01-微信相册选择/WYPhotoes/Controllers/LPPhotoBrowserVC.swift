@@ -60,6 +60,7 @@ class LPPhotoBrowserVC: UIViewController {
         collectionView.scrollToItem(at: IndexPath(item: currentIndex - 1, section: 0), at: .left, animated: false)
         let model = dataSource[currentIndex - 1]
         rightIcon.isSelected = model.isSelected
+        automaticallyAdjustsScrollViewInsets = false
     }
     
     private func prepareCollectionView() {
@@ -76,6 +77,7 @@ class LPPhotoBrowserVC: UIViewController {
         collectionView.delegate = self
         collectionView.register(UINib(nibName: LPBrowserCellId, bundle: nil), forCellWithReuseIdentifier: LPBrowserCellId)
         collectionView.isPagingEnabled = true
+        collectionView.showsHorizontalScrollIndicator = false
         self.collectionView = collectionView
         view.addSubview(collectionView)
     }
@@ -91,7 +93,8 @@ class LPPhotoBrowserVC: UIViewController {
         let selectedView = LPThumbSelectedView(frame: CGRect(x: 0, y: view.bounds.height - 118, width: UIScreen.main.bounds.width, height: 72))
         bottomSelectedView = selectedView
         bottomSelectedView.selectedIndexs = selectedIndexs
-        bottomSelectedView.backgroundColor = .orange
+        bottomSelectedView.backgroundColor = UIColor(white: 0, alpha: 0.6)
+        bottomSelectedView.alpha = selectedIndexs.count > 0 ? 1 : 0
         
         var ds = [LPPhotoSelectModel]()
         for i in selectedIndexs {
@@ -120,6 +123,7 @@ class LPPhotoBrowserVC: UIViewController {
         sendBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
         self.sendBtn = sendBtn
         handleSendBtn()
+        bottomView.backgroundColor = UIColor(white: 0, alpha: 0.6)
         
         bottomView.addSubview(sendBtn)
         view.addSubview(bottomView)
@@ -192,7 +196,6 @@ extension LPPhotoBrowserVC: UICollectionViewDataSource, UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LPBrowserCellId, for: indexPath) as! LPBrowserCell
         cell.model = dataSource[indexPath.item]
-        
         return cell
     }
     

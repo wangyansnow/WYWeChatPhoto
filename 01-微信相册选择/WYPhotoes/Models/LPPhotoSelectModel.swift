@@ -22,6 +22,7 @@ class LPPhotoSelectModel: NSObject {
     var isSelected = false
     var thumbImage: UIImage?
     var thumbSize = CGSize.zero
+    var browserSize = CGSize.zero
     var isCamera = false
     var isShowCover = false
     var originImage: UIImage? {
@@ -31,6 +32,22 @@ class LPPhotoSelectModel: NSObject {
             
             var img: UIImage?
             PHImageManager.default().requestImage(for: asset!, targetSize: PHImageManagerMaximumSize, contentMode: .default, options: options) { (image, _) in
+                img = image
+            }
+            return img
+        }
+    }
+    var browserImage: UIImage? {
+        get {
+            let options = PHImageRequestOptions()
+            options.isSynchronous = true
+            
+            var img: UIImage?
+            var size = browserSize
+            if size.width == 0 {
+                size = PHImageManagerMaximumSize
+            }
+            PHImageManager.default().requestImage(for: asset!, targetSize: size, contentMode: .default, options: options) { (image, _) in
                 img = image
             }
             return img

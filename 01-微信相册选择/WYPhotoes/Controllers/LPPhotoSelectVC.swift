@@ -148,6 +148,10 @@ extension LPPhotoSelectVC: UICollectionViewDataSource, UICollectionViewDelegate 
     
     // MARK: - UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard indexPath.item != 0 else {
+            return
+        }
+        
         let model = dataSource[indexPath.item]
         if model.isShowCover && !model.isSelected {
             return
