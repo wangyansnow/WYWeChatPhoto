@@ -49,7 +49,7 @@ class LPGroupVC: UIViewController {
         guard let firstGroup = dataSource?.first else {
             return
         }
-        
+    
         push(group: firstGroup, animate: false)
     }
     
@@ -69,7 +69,7 @@ class LPGroupVC: UIViewController {
         let photoSelectVC = LPPhotoSelectVC()
         photoSelectVC.assets = PHAsset.fetchAssets(in: group.assetCollection, options: fetchOptions)
         photoSelectVC.title = group.name
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .done, target: nil, action: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationController?.pushViewController(photoSelectVC, animated: animate)
     }    
 }

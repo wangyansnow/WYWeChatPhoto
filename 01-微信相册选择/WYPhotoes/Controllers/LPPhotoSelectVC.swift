@@ -18,6 +18,8 @@ class LPPhotoSelectVC: UIViewController {
     }
     
     func handleAssets() {
+        let scale = UIScreen.main.scale
+        let size = CGSize(width: thumbSize.width * scale, height: thumbSize.height * scale)
         DispatchQueue.global().async {
             var models = [LPPhotoSelectModel]()
             let cameraModel = LPPhotoSelectModel()
@@ -26,7 +28,7 @@ class LPPhotoSelectVC: UIViewController {
             
             self.assets.enumerateObjects({ (asset, _, _) in
                 let model = LPPhotoSelectModel()
-                model.thumbSize = self.thumbSize
+                model.thumbSize = size
                 model.asset = asset
                 models.append(model)
                 

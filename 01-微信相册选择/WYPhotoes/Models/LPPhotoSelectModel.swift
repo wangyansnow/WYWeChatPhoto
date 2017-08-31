@@ -14,7 +14,7 @@ class LPPhotoSelectModel: NSObject {
         didSet {
             let options = PHImageRequestOptions()
             options.isSynchronous = true
-            PHImageManager.default().requestImage(for: asset!, targetSize: thumbSize, contentMode: .aspectFill, options: options) { (image, _) in
+            PHImageManager.default().requestImage(for: asset!, targetSize: thumbSize, contentMode: .aspectFit, options: options) { (image, _) in
                 self.thumbImage = image
             }
         }
