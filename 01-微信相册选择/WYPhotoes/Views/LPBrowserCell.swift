@@ -30,6 +30,5 @@ class LPBrowserCell: UICollectionViewCell {
         iconView.image = image
         
         iconView.frame = CGRect(x: 0, y: y, width: width, height: h)
-        model.browserSize = CGSize(width: width, height: h)
     }
 }

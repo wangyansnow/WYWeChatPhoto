@@ -201,8 +201,8 @@ extension LPPhotoBrowserVC: UICollectionViewDataSource, UICollectionViewDelegate
     }
     
     // MARK: - UICollectionViewDelegate
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let x = scrollView.contentOffset.x / (UIScreen.main.bounds.width + 20)
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let x = scrollView.contentOffset.x / (UIScreen.main.bounds.width + 20) + 0.5
         currentIndex = Int(x) + 1
         let currentModel = dataSource[currentIndex - 1]
         rightIcon.isSelected = currentModel.isSelected

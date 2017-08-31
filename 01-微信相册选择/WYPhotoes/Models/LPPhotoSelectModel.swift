@@ -14,6 +14,7 @@ class LPPhotoSelectModel: NSObject {
         didSet {
             let options = PHImageRequestOptions()
             options.isSynchronous = true
+            
             PHImageManager.default().requestImage(for: asset!, targetSize: thumbSize, contentMode: .aspectFit, options: options) { (image, _) in
                 self.thumbImage = image
             }
@@ -22,7 +23,6 @@ class LPPhotoSelectModel: NSObject {
     var isSelected = false
     var thumbSize = CGSize.zero
     var thumbImage: UIImage?
-    var browserSize = CGSize.zero
     var isCamera = false
     var isShowCover = false
     var originImage: UIImage? {
@@ -52,13 +52,16 @@ class LPPhotoSelectModel: NSObject {
     }
     
     func getBrowserImage(finishedBlock: @escaping ((_ image: UIImage?) -> ())) {
-        var size = browserSize
-        if size.width == 0 {
-            size = PHImageManagerMaximumSize
+        guard let wyAsset = asset else {
+            return
         }
+        let w = UIScreen.main.bounds.width
+        let h = CGFloat(wyAsset.pixelHeight) * w / CGFloat(wyAsset.pixelWidth)
+        let scale = UIScreen.main.scale
+        
         let options = PHImageRequestOptions()
         options.deliveryMode = .fastFormat
-        PHImageManager.default().requestImage(for: asset!, targetSize: size, contentMode: .default, options: nil) { (image, _) in
+        PHImageManager.default().requestImage(for: asset!, targetSize: CGSize(width: w * scale, height: h * scale), contentMode: .default, options: nil) { (image, _) in
             finishedBlock(image)
         }
     }
