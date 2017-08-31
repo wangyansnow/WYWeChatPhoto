@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Photos
 
 protocol LPPhotoSelectCellDelegate: class {
     func  photoSelectCellSelected(cell: LPPhotoSelectCell, index: Int, isAdd: Bool)
@@ -46,11 +45,6 @@ class LPPhotoSelectCell: UICollectionViewCell {
     @IBOutlet weak var coverView: UIView!
     @IBOutlet weak var cameraView: UIView!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-    }
-    
     @IBAction func selectedBtnClick(_ sender: UIButton) {
         if !selectedBtn.isSelected {
             if let photoSelectVC = delegate as? LPPhotoSelectVC {
@@ -65,5 +59,4 @@ class LPPhotoSelectCell: UICollectionViewCell {
         selectedBtn.isSelected = !selectedBtn.isSelected
         delegate?.photoSelectCellSelected(cell: self, index: index, isAdd: selectedBtn.isSelected)
     }
-    
 }

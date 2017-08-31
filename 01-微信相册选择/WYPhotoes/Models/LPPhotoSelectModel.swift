@@ -10,20 +10,18 @@ import UIKit
 import Photos
 
 class LPPhotoSelectModel: NSObject {
-    var asset: PHAsset?
-    var isSelected = false
-    var thumbSize = CGSize.zero
-    var thumbImage: UIImage? {
-        get {
+    var asset: PHAsset? {
+        didSet {
             let options = PHImageRequestOptions()
             options.isSynchronous = true
-            var img: UIImage?
             PHImageManager.default().requestImage(for: asset!, targetSize: thumbSize, contentMode: .aspectFill, options: options) { (image, _) in
-                img = image
+                self.thumbImage = image
             }
-            return img
         }
     }
+    var isSelected = false
+    var thumbSize = CGSize.zero
+    var thumbImage: UIImage?
     var browserSize = CGSize.zero
     var isCamera = false
     var isShowCover = false
@@ -39,23 +37,6 @@ class LPPhotoSelectModel: NSObject {
             return img
         }
     }
-    var browserImage: UIImage? {
-        get {
-            let options = PHImageRequestOptions()
-            options.isSynchronous = true
-            
-            var img: UIImage?
-            var size = browserSize
-            if size.width == 0 {
-                size = PHImageManagerMaximumSize
-            }
-            PHImageManager.default().requestImage(for: asset!, targetSize: size, contentMode: .default, options: options) { (image, _) in
-                img = image
-            }
-            return img
-        }
-    }
-    
     var thumbSelectedImage: UIImage? {
         get {
             let options = PHImageRequestOptions()
@@ -66,6 +47,16 @@ class LPPhotoSelectModel: NSObject {
                 img = image
             }
             return img
+        }
+    }
+    
+    func getBrowserImage(finishedBlock: @escaping ((_ image: UIImage?) -> ())) {
+        var size = browserSize
+        if size.width == 0 {
+            size = PHImageManagerMaximumSize
+        }
+        PHImageManager.default().requestImage(for: asset!, targetSize: size, contentMode: .default, options: nil) { (image, _) in
+            finishedBlock(image)
         }
     }
     

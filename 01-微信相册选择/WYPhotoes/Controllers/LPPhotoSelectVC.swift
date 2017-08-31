@@ -34,6 +34,7 @@ class LPPhotoSelectVC: UIViewController {
                     self.dataSource = models
                     self.collectionView.reloadData()
                 }
+                Thread.sleep(forTimeInterval: 0.01)
             })
         }
     }

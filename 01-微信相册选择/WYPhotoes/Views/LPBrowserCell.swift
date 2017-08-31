@@ -7,22 +7,16 @@
 //
 
 import UIKit
-import Photos
 
 class LPBrowserCell: UICollectionViewCell {
     
     @IBOutlet private weak var iconView: UIImageView!
     var model: LPPhotoSelectModel! {
         didSet {
-            PHImageManager.default().requestImage(for: model.asset!, targetSize: PHImageManagerMaximumSize, contentMode: .default, options: nil) { (image, _) in
+            model.getBrowserImage { [unowned self]  (image) in
                 self.setIcon(img: image)
             }
         }
-    }
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
     }
     
     private func setIcon(img: UIImage?) {
