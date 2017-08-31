@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 @objc protocol LPImagePickerControllerDelegate: class {
     func imagePickerController(_ picker: LPImagePickerController, didFinishPickingMediaWithInfo info: [UIImage])
@@ -32,8 +33,28 @@ class LPImagePickerController: UINavigationController {
         navigationBar.barTintColor = UIColor(hex: 0xeff0fa)
         navigationBar.tintColor = UIColor(hex: 0x333333)
         navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor(hex: 0x333333)]
-        setViewControllers([LPGroupVC()], animated: false)
         navigationBar.isTranslucent = false
+        
+        let status = PHPhotoLibrary.authorizationStatus()
+        if status == .authorized {
+            setViewControllers([LPGroupVC()], animated: false)
+        } else if status == .notDetermined {
+            PHPhotoLibrary.requestAuthorization { [unowned self]  (status) in
+                guard status == .authorized else {
+                    DispatchQueue.main.async {
+                        self.dismiss(animated: true, completion: nil)
+                        self.lpdelegate?.imagePickerControllerDidCancel?(self)
+                    }
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    self.setViewControllers([LPGroupVC()], animated: false)
+                }
+            }
+        } else { // 不允许访问
+            lpdelegate?.imagePickerControllerDidCancel?(self)
+        }
     }
 
     deinit {
