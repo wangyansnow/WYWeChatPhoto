@@ -27,6 +27,10 @@ class LPPhotoSelectVC: UIViewController {
             models.append(cameraModel)
             
             self.assets.enumerateObjects({ (asset, _, _) in
+                guard asset.mediaType == .image else {
+                    return
+                }
+                
                 let model = LPPhotoSelectModel()
                 model.thumbSize = size
                 model.asset = asset

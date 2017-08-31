@@ -41,6 +41,7 @@ class LPPhotoSelectModel: NSObject {
         get {
             let options = PHImageRequestOptions()
             options.isSynchronous = true
+            options.deliveryMode = .fastFormat
             
             var img: UIImage?
             PHImageManager.default().requestImage(for: asset!, targetSize: CGSize(width: 66, height: 66), contentMode: .default, options: options) { (image, _) in
@@ -55,6 +56,8 @@ class LPPhotoSelectModel: NSObject {
         if size.width == 0 {
             size = PHImageManagerMaximumSize
         }
+        let options = PHImageRequestOptions()
+        options.deliveryMode = .fastFormat
         PHImageManager.default().requestImage(for: asset!, targetSize: size, contentMode: .default, options: nil) { (image, _) in
             finishedBlock(image)
         }
