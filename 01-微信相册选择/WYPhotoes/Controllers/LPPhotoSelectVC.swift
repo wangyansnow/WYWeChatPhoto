@@ -10,14 +10,14 @@ import UIKit
 import Photos
 
 class LPPhotoSelectVC: UIViewController {
-
-    var assets: PHFetchResult<PHAsset>! {
+    
+    var assets: PHFetchResult<PHAsset>? {
         didSet {
             handleAssets()
         }
     }
-    
     func handleAssets() {
+        
         let scale = UIScreen.main.scale
         let size = CGSize(width: thumbSize.width * scale, height: thumbSize.height * scale)
         DispatchQueue.global().async {
@@ -26,7 +26,7 @@ class LPPhotoSelectVC: UIViewController {
             cameraModel.isCamera = true
             models.append(cameraModel)
             
-            self.assets.enumerateObjects({ (asset, _, _) in
+            self.assets?.enumerateObjects({ (asset, _, _) in
                 guard asset.mediaType == .image else {
                     return
                 }
@@ -37,6 +37,7 @@ class LPPhotoSelectVC: UIViewController {
                 models.append(model)
                 
                 DispatchQueue.main.async {
+                    
                     self.dataSource = models
                     self.collectionView.reloadData()
                 }
@@ -45,7 +46,7 @@ class LPPhotoSelectVC: UIViewController {
         }
     }
     
-    var dataSource: [LPPhotoSelectModel]!
+    var dataSource = [LPPhotoSelectModel]()
     
     private lazy var thumbSize: CGSize = {
         let width = (self.view.bounds.width - 3) * 0.25
