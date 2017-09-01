@@ -20,33 +20,74 @@ class LPPhotoSelectVC: UIViewController {
         
         let scale = UIScreen.main.scale
         let size = CGSize(width: thumbSize.width * scale, height: thumbSize.height * scale)
+        
+        let maxShow = Int((UIScreen.main.bounds.height - 64) / thumbSize.width * 4)
+        
+        
+        var maxAssets = [PHAsset]()
+        assets?.enumerateObjects({ (asset, count, _) in
+            maxAssets.append(asset)
+        })
+        for _ in 0..<3 {
+            maxAssets += maxAssets
+        }
+        
+        let maxCount = maxAssets.count
+        print("maxCount = \(maxCount)")
         DispatchQueue.global().async {
             let cameraModel = LPPhotoSelectModel()
             cameraModel.isCamera = true
             self.dataSource.append(cameraModel)
             
-            self.assets?.enumerateObjects({ (asset, _, _) in
-                guard asset.mediaType == .image else {
-                    return
-                }
-                
+            var models = [LPPhotoSelectModel]()
+            models.append(cameraModel)
+            for i in 0..<maxCount {
                 let model = LPPhotoSelectModel()
                 model.thumbSize = size
-                model.asset = asset
-                
-                DispatchQueue.main.async {
-                    
-                    self.dataSource.append(model)
-                    
-                    if self.dataSource.count == self.collectionView.numberOfItems(inSection: 0) {
-                        self.collectionView.reloadData()
-                    } else {
-                        self.collectionView.insertItems(at: [IndexPath(item: self.dataSource.count - 1, section: 0)])
+                model.asset = maxAssets[i]
+                models.append(model)
+//                if i % 4 == 0 {
+                    DispatchQueue.main.async {
+                        self.dataSource.append(model)
+                        
+                        if self.dataSource.count == self.collectionView.numberOfItems(inSection: 0) {
+                            self.collectionView.reloadData()
+                        } else {
+                            self.collectionView.insertItems(at: [IndexPath(item: self.dataSource.count - 1, section: 0)])
+                        }
                     }
-                    
-                }
-            })
+//                }
+            }
+        
         }
+        
+//        DispatchQueue.global().async {
+//            let cameraModel = LPPhotoSelectModel()
+//            cameraModel.isCamera = true
+//            self.dataSource.append(cameraModel)
+//            
+//            self.assets?.enumerateObjects({ (asset, _, _) in
+//                guard asset.mediaType == .image else {
+//                    return
+//                }
+//                
+//                let model = LPPhotoSelectModel()
+//                model.thumbSize = size
+//                model.asset = asset
+//                
+//                DispatchQueue.main.async {
+//                    
+//                    self.dataSource.append(model)
+//                    
+//                    if self.dataSource.count == self.collectionView.numberOfItems(inSection: 0) {
+//                        self.collectionView.reloadData()
+//                    } else {
+//                        self.collectionView.insertItems(at: [IndexPath(item: self.dataSource.count - 1, section: 0)])
+//                    }
+//                    
+//                }
+//            })
+//        }
     }
     
     var dataSource = [LPPhotoSelectModel]()

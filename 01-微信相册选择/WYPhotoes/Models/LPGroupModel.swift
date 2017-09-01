@@ -66,7 +66,11 @@ class LPGroupModel: NSObject {
             }
             
             let scale = UIScreen.main.scale
-            PHImageManager.default().requestImage(for: asset, targetSize: CGSize(width: 60 * scale, height: 60 * scale), contentMode: .aspectFill, options: nil, resultHandler: { (img, _) in
+//            PHImageManager.default().requestImage(for: asset, targetSize: CGSize(width: 60 * scale, height: 60 * scale), contentMode: .aspectFill, options: nil, resultHandler: { (img, _) in
+//                group.thumbImage = img
+//            })
+            
+            PHCachingImageManager.default().requestImage(for: asset, targetSize: CGSize(width: 60 * scale, height: 60 * scale), contentMode: .aspectFill, options: nil, resultHandler: { (img, _) in
                 group.thumbImage = img
             })
         }

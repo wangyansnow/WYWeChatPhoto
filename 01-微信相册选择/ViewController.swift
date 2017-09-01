@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 class ViewController: UIViewController {
     
@@ -17,7 +18,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .orange
-//        UIImagePickerController
+        
+        
     }
 
     @IBAction func selectPhotoBtnClick(_ sender: UIButton) {

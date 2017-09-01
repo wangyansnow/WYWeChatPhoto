@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 protocol LPPhotoSelectCellDelegate: class {
     func  photoSelectCellSelected(cell: LPPhotoSelectCell, index: Int, isAdd: Bool)
@@ -29,6 +30,8 @@ class LPPhotoSelectCell: UICollectionViewCell {
             cameraView.isHidden = true
             rightView.isHidden = false
             self.iconView.image = model?.thumbImage
+            
+            
             if model?.isSelected ?? false {
                 selectedBtn.isSelected = true
                 coverView.isHidden = true
