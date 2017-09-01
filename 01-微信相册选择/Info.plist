@@ -3,7 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>NSCameraUsageDescription</key>
-	<string>允许 xxx 访问你的相机</string>
+	<string>This lets you take photos within the app.
+</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>允许 xxx 访问你的相册</string>
 	<key>CFBundleDevelopmentRegion</key>

@@ -121,13 +121,13 @@ extension LPThumbSelectedView: UICollectionViewDataSource, UICollectionViewDeleg
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        itemClickBlock?(selectedIndexs[indexPath.item])
         
         guard let cell = collectionView.cellForItem(at: indexPath) as? LPThumbSelectedCell else {
             return
         }
-        cell.updateSelectUI(isSelected: true)
         selectedCell?.updateSelectUI(isSelected: false)
+        cell.updateSelectUI(isSelected: true)
         selectedCell = cell
+        itemClickBlock?(selectedIndexs[indexPath.item])
     }
 }
