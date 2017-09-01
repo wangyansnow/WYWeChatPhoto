@@ -74,8 +74,12 @@ class LPThumbSelectedView: UIView {
             
             selectedIndexs.append(index)
             dataSource.append(model)
-            collectionView.reloadData()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: { 
+            if collectionView.numberOfItems(inSection: 0) == dataSource.count {
+                collectionView.reloadData()
+            } else {
+                collectionView.insertItems(at: [IndexPath(item: dataSource.count - 1, section: 0)])
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
                 self.changeToIndex(index: index)
             })
             return
@@ -88,7 +92,12 @@ class LPThumbSelectedView: UIView {
         dataSource.remove(at: i)
         selectedCell?.updateSelectUI(isSelected: false)
         selectedCell = nil
-        collectionView.reloadData()
+
+        if collectionView.numberOfItems(inSection: 0) == dataSource.count {
+            collectionView.reloadData()
+        } else {
+            collectionView.deleteItems(at: [IndexPath(item: i, section: 0)])
+        }
         
         if selectedIndexs.count == 0 {
             UIView.animate(withDuration: 0.25, animations: {

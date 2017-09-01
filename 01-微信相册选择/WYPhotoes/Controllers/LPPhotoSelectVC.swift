@@ -21,10 +21,9 @@ class LPPhotoSelectVC: UIViewController {
         let scale = UIScreen.main.scale
         let size = CGSize(width: thumbSize.width * scale, height: thumbSize.height * scale)
         DispatchQueue.global().async {
-            var models = [LPPhotoSelectModel]()
             let cameraModel = LPPhotoSelectModel()
             cameraModel.isCamera = true
-            models.append(cameraModel)
+            self.dataSource.append(cameraModel)
             
             self.assets?.enumerateObjects({ (asset, _, _) in
                 guard asset.mediaType == .image else {
@@ -34,14 +33,18 @@ class LPPhotoSelectVC: UIViewController {
                 let model = LPPhotoSelectModel()
                 model.thumbSize = size
                 model.asset = asset
-                models.append(model)
                 
                 DispatchQueue.main.async {
                     
-                    self.dataSource = models
-                    self.collectionView.reloadData()
+                    self.dataSource.append(model)
+                    
+                    if self.dataSource.count == self.collectionView.numberOfItems(inSection: 0) {
+                        self.collectionView.reloadData()
+                    } else {
+                        self.collectionView.insertItems(at: [IndexPath(item: self.dataSource.count - 1, section: 0)])
+                    }
+                    
                 }
-                Thread.sleep(forTimeInterval: 0.01)
             })
         }
     }
