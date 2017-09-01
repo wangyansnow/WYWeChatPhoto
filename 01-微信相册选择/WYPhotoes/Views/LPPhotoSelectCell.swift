@@ -29,8 +29,15 @@ class LPPhotoSelectCell: UICollectionViewCell {
             
             cameraView.isHidden = true
             rightView.isHidden = false
-            self.iconView.image = model?.thumbImage
             
+            let scale = UIScreen.main.scale
+            let w = iconView.bounds.width
+            let size = CGSize(width: w * scale, height: w * scale)
+            
+            PHImageManager.default().requestImage(for: (model?.asset!)!, targetSize: size, contentMode: .aspectFit, options: nil) { (image, info) in
+                print("info = \(String(describing: info))")
+                self.iconView.image = image
+            }
             
             if model?.isSelected ?? false {
                 selectedBtn.isSelected = true
