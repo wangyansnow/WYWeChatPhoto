@@ -21,7 +21,7 @@ class LPPhotoSelectVC: UIViewController {
         let scale = UIScreen.main.scale
         let size = CGSize(width: thumbSize.width * scale, height: thumbSize.height * scale)
         
-        let maxShow = Int((UIScreen.main.bounds.height - 64) / thumbSize.width * 4) + 40
+        let maxShow = Int((UIScreen.main.bounds.height - 64) / thumbSize.width * 4) + 0
         
         
         var maxAssets = [PHAsset]()
@@ -41,39 +41,51 @@ class LPPhotoSelectVC: UIViewController {
             
             var models = [LPPhotoSelectModel]()
             models.append(cameraModel)
-            for i in 0..<maxCount {
+            
+            for i in 0..<maxShow {
                 let model = LPPhotoSelectModel()
                 model.thumbSize = size
                 model.asset = maxAssets[i]
                 models.append(model)
-                if i < maxShow {
-                    DispatchQueue.main.async {
-                        self.dataSource.append(model)
-                        
-                        if self.dataSource.count == self.collectionView.numberOfItems(inSection: 0) {
-                            self.collectionView.reloadData()
-                        } else {
-                            self.collectionView.insertItems(at: [IndexPath(item: self.dataSource.count - 1, section: 0)])
-                        }
+                
+                DispatchQueue.main.async {
+                    self.dataSource.append(model)
+                    
+                    if self.collectionView.numberOfItems(inSection: 0) == self.dataSource.count {
+                        self.collectionView.reloadData()
+                    } else {
+                        self.collectionView.insertItems(at: [IndexPath(item: i, section: 0)])
                     }
                 }
             }
-        
-            guard maxCount > maxShow else {
-                return
-            }
-            var indexs = [IndexPath]()
+            
             for i in maxShow..<maxCount {
-                indexs.append(IndexPath(item: i, section: 0))
+                let model = LPPhotoSelectModel()
+                model.thumbSize = size
+                model.asset = maxAssets[i]
+                models.append(model)
             }
-            self.dataSource = models
+            
             DispatchQueue.main.async {
-                if self.dataSource.count == self.collectionView.numberOfItems(inSection: 0) {
-                    self.collectionView.reloadData()
-                } else {
-                    self.collectionView.insertItems(at: indexs)
-                }
+                self.dataSource = models
+                self.collectionView.reloadData()
             }
+        
+//            guard maxCount > maxShow else {
+//                return
+//            }
+//            var indexs = [IndexPath]()
+//            for i in maxShow..<maxCount {
+//                indexs.append(IndexPath(item: i, section: 0))
+//            }
+//            self.dataSource = models
+//            DispatchQueue.main.async {
+//                if self.dataSource.count == self.collectionView.numberOfItems(inSection: 0) {
+//                    self.collectionView.reloadData()
+//                } else {
+//                    self.collectionView.insertItems(at: indexs)
+//                }
+//            }
         }
     }
     
