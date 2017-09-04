@@ -88,31 +88,35 @@ class LPPhotoSelectModel: NSObject {
     
     class func getOriginImages(models: [LPPhotoSelectModel], finishedBlock: @escaping ((_ images: [UIImage]) -> ())) {
         
-        var imgs = [UIImage]()
-        for model in models {
-            guard let asset = model.asset else {return}
-            
-            let options = PHImageRequestOptions()
-            options.isSynchronous = true
-            options.isNetworkAccessAllowed = true
-            
-            let originW = CGFloat(asset.pixelWidth)
-            let originH = CGFloat(asset.pixelHeight)
-            let h = 414 * originH / originW
-
-            PHImageManager.default().requestImage(for: asset, targetSize: CGSize(width: 414, height: h), contentMode: .default, options: options) { (image, _) in
+        DispatchQueue.global().async {
+            var imgs = [UIImage]()
+            for model in models {
+                guard let asset = model.asset else {return}
                 
-                guard let img = image else {
-                    if let thumbImage = model.thumbImage {
-                        imgs.append(thumbImage)
+                let options = PHImageRequestOptions()
+                options.isSynchronous = true
+                options.isNetworkAccessAllowed = true
+                
+                let originW = CGFloat(asset.pixelWidth)
+                let originH = CGFloat(asset.pixelHeight)
+                let h = 414 * originH / originW
+                
+                PHImageManager.default().requestImage(for: asset, targetSize: CGSize(width: 414, height: h), contentMode: .default, options: options) { (image, _) in
+                    
+                    guard let img = image else {
+                        if let thumbImage = model.thumbImage {
+                            imgs.append(thumbImage)
+                        }
+                        return
                     }
-                    return
+                    imgs.append(img)
                 }
-                imgs.append(img)
+            }
+            
+            DispatchQueue.main.async {
+                finishedBlock(imgs)
             }
         }
-        
-        finishedBlock(imgs)
     }
     
 }
