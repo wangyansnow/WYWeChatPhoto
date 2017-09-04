@@ -11,6 +11,7 @@ import Photos
 
 class LPPhotoSelectVC: UIViewController {
     
+    var count = 0
     var assets: PHFetchResult<PHAsset>? {
         didSet {
             handleAssets()
@@ -20,6 +21,7 @@ class LPPhotoSelectVC: UIViewController {
         
         let scale = UIScreen.main.scale
         let size = CGSize(width: thumbSize.width * scale, height: thumbSize.height * scale)
+        let maxShow = Int((UIScreen.main.bounds.height - 64) / thumbSize.width * 4) + 0
         
         var maxAssets = [PHAsset]()
         assets?.enumerateObjects({ (asset, count, _) in
@@ -31,30 +33,24 @@ class LPPhotoSelectVC: UIViewController {
         
         let maxCount = maxAssets.count
         print("maxCount = \(maxCount)")
+        
+        let cameraModel = LPPhotoSelectModel()
+        cameraModel.isCamera = true
+        self.dataSource.append(cameraModel)
+        var models = [LPPhotoSelectModel]()
+        models.append(cameraModel)
+        
+        for i in 1..<maxShow {
+            let model = LPPhotoSelectModel()
+            model.thumbSize = size
+            model.asset = maxAssets[i]
+            models.append(model)
+            
+            self.dataSource.append(model)
+        }
+        self.collectionView.reloadData()
+        
         DispatchQueue.global().async {
-            let cameraModel = LPPhotoSelectModel()
-            cameraModel.isCamera = true
-            self.dataSource.append(cameraModel)
-            
-            var models = [LPPhotoSelectModel]()
-            models.append(cameraModel)
-            
-            for i in 0..<maxShow {
-                let model = LPPhotoSelectModel()
-                model.thumbSize = size
-                model.asset = maxAssets[i]
-                models.append(model)
-                
-                DispatchQueue.main.async {
-                    self.dataSource.append(model)
-                    
-                    if self.collectionView.numberOfItems(inSection: 0) == self.dataSource.count {
-                        self.collectionView.reloadData()
-                    } else {
-                        self.collectionView.insertItems(at: [IndexPath(item: i, section: 0)])
-                    }
-                }
-            }
             
             for i in maxShow..<maxCount {
                 let model = LPPhotoSelectModel()
@@ -67,22 +63,6 @@ class LPPhotoSelectVC: UIViewController {
                 self.dataSource = models
                 self.collectionView.reloadData()
             }
-        
-//            guard maxCount > maxShow else {
-//                return
-//            }
-//            var indexs = [IndexPath]()
-//            for i in maxShow..<maxCount {
-//                indexs.append(IndexPath(item: i, section: 0))
-//            }
-//            self.dataSource = models
-//            DispatchQueue.main.async {
-//                if self.dataSource.count == self.collectionView.numberOfItems(inSection: 0) {
-//                    self.collectionView.reloadData()
-//                } else {
-//                    self.collectionView.insertItems(at: indexs)
-//                }
-//            }
         }
     }
     
@@ -102,7 +82,7 @@ class LPPhotoSelectVC: UIViewController {
         layout.minimumLineSpacing = 1
         layout.minimumInteritemSpacing = 1
         
-        let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height - 46), collectionViewLayout: layout)
+        let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height - 46 - 64), collectionViewLayout: layout)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = .white
@@ -199,6 +179,7 @@ class LPPhotoSelectVC: UIViewController {
 extension LPPhotoSelectVC: UICollectionViewDataSource, UICollectionViewDelegate {
     // MARK: - UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        count = 0
         return dataSource.count
     }
     
@@ -208,7 +189,6 @@ extension LPPhotoSelectVC: UICollectionViewDataSource, UICollectionViewDelegate 
         cell.model = dataSource[index]
         cell.index = index
         cell.delegate = self
-        
         return cell
     }
     
