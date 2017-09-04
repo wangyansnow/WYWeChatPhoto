@@ -93,15 +93,16 @@ class LPPhotoBrowserVC: UIViewController {
     private func prepareBottomSelectView() {
         let selectedView = LPThumbSelectedView(frame: CGRect(x: 0, y: view.bounds.height - 118, width: UIScreen.main.bounds.width, height: 72))
         bottomSelectedView = selectedView
-        bottomSelectedView.selectedIndexs = selectedIndexs
         bottomSelectedView.backgroundColor = UIColor(white: 0, alpha: 0.6)
         bottomSelectedView.alpha = selectedIndexs.count > 0 ? 1 : 0
+        bottomSelectedView.selectedIndexs = selectedIndexs
         
         var ds = [LPPhotoSelectModel]()
         for i in selectedIndexs {
             ds.append(dataSource[i - 1])
         }
         bottomSelectedView.dataSource = ds
+        bottomSelectedView.reloadData()
         bottomSelectedView.itemClickBlock = { [unowned self] clickIndex in
             self.currentIndex = clickIndex
             self.collectionView.scrollToItem(at: IndexPath(item: clickIndex - 1, section: 0), at: .left, animated: false)

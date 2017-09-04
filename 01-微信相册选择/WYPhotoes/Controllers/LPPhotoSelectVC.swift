@@ -38,58 +38,57 @@ class LPPhotoSelectVC: UIViewController {
             
             var models = [LPPhotoSelectModel]()
             models.append(cameraModel)
-            for i in 0..<maxCount {
+            
+            for i in 0..<maxShow {
                 let model = LPPhotoSelectModel()
                 model.thumbSize = size
                 model.asset = maxAssets[i]
                 models.append(model)
-//                if i % 4 == 0 {
-                    DispatchQueue.main.async {
-                        self.dataSource.append(model)
-                        
-                        if self.dataSource.count == self.collectionView.numberOfItems(inSection: 0) {
-                            self.collectionView.reloadData()
-                        } else {
-                            self.collectionView.insertItems(at: [IndexPath(item: self.dataSource.count - 1, section: 0)])
-                        }
+                
+                DispatchQueue.main.async {
+                    self.dataSource.append(model)
+                    
+                    if self.collectionView.numberOfItems(inSection: 0) == self.dataSource.count {
+                        self.collectionView.reloadData()
+                    } else {
+                        self.collectionView.insertItems(at: [IndexPath(item: i, section: 0)])
                     }
-//                }
+                }
+            }
+            
+            for i in maxShow..<maxCount {
+                let model = LPPhotoSelectModel()
+                model.thumbSize = size
+                model.asset = maxAssets[i]
+                models.append(model)
+            }
+            
+            DispatchQueue.main.async {
+                self.dataSource = models
+                self.collectionView.reloadData()
             }
         
+//            guard maxCount > maxShow else {
+//                return
+//            }
+//            var indexs = [IndexPath]()
+//            for i in maxShow..<maxCount {
+//                indexs.append(IndexPath(item: i, section: 0))
+//            }
+//            self.dataSource = models
+//            DispatchQueue.main.async {
+//                if self.dataSource.count == self.collectionView.numberOfItems(inSection: 0) {
+//                    self.collectionView.reloadData()
+//                } else {
+//                    self.collectionView.insertItems(at: indexs)
+//                }
+//            }
         }
-        
-//        DispatchQueue.global().async {
-//            let cameraModel = LPPhotoSelectModel()
-//            cameraModel.isCamera = true
-//            self.dataSource.append(cameraModel)
-//            
-//            self.assets?.enumerateObjects({ (asset, _, _) in
-//                guard asset.mediaType == .image else {
-//                    return
-//                }
-//                
-//                let model = LPPhotoSelectModel()
-//                model.thumbSize = size
-//                model.asset = asset
-//                
-//                DispatchQueue.main.async {
-//                    
-//                    self.dataSource.append(model)
-//                    
-//                    if self.dataSource.count == self.collectionView.numberOfItems(inSection: 0) {
-//                        self.collectionView.reloadData()
-//                    } else {
-//                        self.collectionView.insertItems(at: [IndexPath(item: self.dataSource.count - 1, section: 0)])
-//                    }
-//                    
-//                }
-//            })
-//        }
     }
     
     var dataSource = [LPPhotoSelectModel]()
     
-    private lazy var thumbSize: CGSize = {
+    fileprivate lazy var thumbSize: CGSize = {
         let width = (self.view.bounds.width - 3) * 0.25
         return CGSize(width: width, height: width)
     }()
@@ -245,6 +244,42 @@ extension LPPhotoSelectVC: UICollectionViewDataSource, UICollectionViewDelegate 
         
         present(pickerVC, animated: true, completion: nil)
     }
+    
+//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        let phCell = cell as! LPPhotoSelectCell
+//        let model = dataSource[indexPath.item]
+//        
+//        guard let asset = model.asset else {
+//            return
+//        }
+//        
+//        let options = PHImageRequestOptions()
+//        options.isSynchronous = true
+//        options.deliveryMode = .fastFormat
+//        PHImageManager.default().requestImage(for: asset, targetSize: thumbSize, contentMode: .aspectFit, options: options) { (image, _) in
+//            phCell.iconView.image = image
+//        }
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        let phCell = cell as! LPPhotoSelectCell
+//        let model = dataSource[indexPath.item]
+//        
+//        guard let asset = model.asset else {
+//            return
+//        }
+//        
+//        let options = PHImageRequestOptions()
+//        options.isSynchronous = true
+//        options.deliveryMode = .fastFormat
+//        
+//        let scale = UIScreen.main.scale
+//        let size = CGSize(width: thumbSize.width * scale, height: thumbSize.height * scale)
+//        
+//        PHImageManager.default().requestImage(for: asset, targetSize: size, contentMode: .aspectFit, options: options) { (image, _) in
+//            phCell.iconView.image = image
+//        }
+//    }
 }
 
 extension LPPhotoSelectVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {

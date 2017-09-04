@@ -14,7 +14,7 @@ class LPThumbSelectedView: UIView {
     var selectedIndexs = [Int]()
     var dataSource = [LPPhotoSelectModel]() {
         didSet {
-            collectionView.reloadData()
+            print("dataSource")
         }
     }
     weak var selectedCell: LPThumbSelectedCell?
@@ -39,14 +39,9 @@ class LPThumbSelectedView: UIView {
     deinit {
         print("LPThumbSelectedView")
     }
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-    }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func reloadData() {
+        collectionView.reloadData()
     }
     
     func changeToIndex(index: Int) {
@@ -74,17 +69,13 @@ class LPThumbSelectedView: UIView {
             
             selectedIndexs.append(index)
             dataSource.append(model)
-            if collectionView.numberOfItems(inSection: 0) == dataSource.count {
-                collectionView.reloadData()
-            } else {
-                collectionView.insertItems(at: [IndexPath(item: dataSource.count - 1, section: 0)])
-            }
+            collectionView.insertItems(at: [IndexPath(item: dataSource.count - 1, section: 0)])
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
                 self.changeToIndex(index: index)
             })
             return
         }
-        
+
         guard let i = selectedIndexs.index(of: index) else {
             return
         }
@@ -93,11 +84,7 @@ class LPThumbSelectedView: UIView {
         selectedCell?.updateSelectUI(isSelected: false)
         selectedCell = nil
 
-        if collectionView.numberOfItems(inSection: 0) == dataSource.count {
-            collectionView.reloadData()
-        } else {
-            collectionView.deleteItems(at: [IndexPath(item: i, section: 0)])
-        }
+        collectionView.deleteItems(at: [IndexPath(item: i, section: 0)])
         
         if selectedIndexs.count == 0 {
             UIView.animate(withDuration: 0.25, animations: {
