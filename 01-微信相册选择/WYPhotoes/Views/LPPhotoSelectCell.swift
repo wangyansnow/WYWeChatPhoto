@@ -15,6 +15,15 @@ protocol LPPhotoSelectCellDelegate: class {
 
 class LPPhotoSelectCell: UICollectionViewCell {
 
+    static var wyThread: Thread!
+    static let justDoOnceThing: () = {
+        print("justDoOnceThing")
+        LPPhotoSelectCell.wyThread = Thread(block: {
+            print("create thread = \(Thread.current), runLoop.Mode = \(RunLoop.current.currentMode)")
+            RunLoop.current.run()
+        })
+        LPPhotoSelectCell.wyThread.start()
+    }()
     weak var delegate: LPPhotoSelectCellDelegate?
     var index: Int = 0
     var model: LPPhotoSelectModel? {
@@ -35,9 +44,12 @@ class LPPhotoSelectCell: UICollectionViewCell {
             let size = CGSize(width: w * scale, height: w * scale)
             
             PHImageManager.default().requestImage(for: (model?.asset!)!, targetSize: size, contentMode: .aspectFit, options: nil) { (image, info) in
-                print("info = \(String(describing: info))")
+//                print("info = \(String(describing: info))")
                 self.iconView.image = image
             }
+            
+            LPPhotoSelectCell.justDoOnceThing
+            self.perform(#selector(requestImage), on:LPPhotoSelectCell.wyThread,  with: nil, waitUntilDone: false, modes: [RunLoopMode.defaultRunLoopMode.rawValue])
             
             if model?.isSelected ?? false {
                 selectedBtn.isSelected = true
@@ -46,6 +58,22 @@ class LPPhotoSelectCell: UICollectionViewCell {
                 selectedBtn.isSelected = false
                 coverView.isHidden = !(model?.isShowCover ?? false)
             }
+        }
+    }
+    
+    @objc private func requestImage() {
+        print("thread = \(Thread.current)")
+        let scale = UIScreen.main.scale
+        let w = iconView.bounds.width
+        let size = CGSize(width: w * scale, height: w * scale)
+        
+        guard let asset = model?.asset else {
+            return
+        }
+        
+        PHImageManager.default().requestImage(for: asset, targetSize: size, contentMode: .aspectFit, options: nil) { (image, info) in
+            print("info = \(String(describing: info))")
+            self.iconView.image = image
         }
     }
     
