@@ -172,7 +172,6 @@ class LPPhotoBrowserVC: UIViewController {
         
         rightIcon.isSelected = !rightIcon.isSelected
         currentModel.isSelected = rightIcon.isSelected
-        collectionView.reloadItems(at: [IndexPath(item: currentIndex - 1, section: 0)])
         handleSendBtn()
     }
     

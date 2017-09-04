@@ -15,15 +15,6 @@ protocol LPPhotoSelectCellDelegate: class {
 
 class LPPhotoSelectCell: UICollectionViewCell {
 
-    static var wyThread: Thread!
-    static let justDoOnceThing: () = {
-        print("justDoOnceThing")
-        LPPhotoSelectCell.wyThread = Thread(block: {
-            print("create thread = \(Thread.current), runLoop.Mode = \(RunLoop.current.currentMode)")
-            RunLoop.current.run()
-        })
-        LPPhotoSelectCell.wyThread.start()
-    }()
     weak var delegate: LPPhotoSelectCellDelegate?
     var index: Int = 0
     var model: LPPhotoSelectModel? {
@@ -39,18 +30,6 @@ class LPPhotoSelectCell: UICollectionViewCell {
             cameraView.isHidden = true
             rightView.isHidden = false
             
-            let scale = UIScreen.main.scale
-            let w = iconView.bounds.width
-            let size = CGSize(width: w * scale, height: w * scale)
-            
-            PHImageManager.default().requestImage(for: (model?.asset!)!, targetSize: size, contentMode: .aspectFit, options: nil) { (image, info) in
-//                print("info = \(String(describing: info))")
-                self.iconView.image = image
-            }
-            
-            LPPhotoSelectCell.justDoOnceThing
-            self.perform(#selector(requestImage), on:LPPhotoSelectCell.wyThread,  with: nil, waitUntilDone: false, modes: [RunLoopMode.defaultRunLoopMode.rawValue])
-            
             if model?.isSelected ?? false {
                 selectedBtn.isSelected = true
                 coverView.isHidden = true
@@ -58,11 +37,12 @@ class LPPhotoSelectCell: UICollectionViewCell {
                 selectedBtn.isSelected = false
                 coverView.isHidden = !(model?.isShowCover ?? false)
             }
+            
+            requestImage()
         }
     }
     
-    @objc private func requestImage() {
-        print("thread = \(Thread.current)")
+    private func requestImage() {
         let scale = UIScreen.main.scale
         let w = iconView.bounds.width
         let size = CGSize(width: w * scale, height: w * scale)
@@ -72,7 +52,8 @@ class LPPhotoSelectCell: UICollectionViewCell {
         }
         
         PHImageManager.default().requestImage(for: asset, targetSize: size, contentMode: .aspectFit, options: nil) { (image, info) in
-            print("info = \(String(describing: info))")
+            guard self.model?.asset?.localIdentifier == asset.localIdentifier else { return }
+            
             self.iconView.image = image
         }
     }

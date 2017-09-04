@@ -27,9 +27,9 @@ class LPPhotoSelectVC: UIViewController {
         assets?.enumerateObjects({ (asset, count, _) in
             maxAssets.append(asset)
         })
-//        for _ in 0..<6 {
-//            maxAssets += maxAssets
-//        }
+        for _ in 0..<6 {
+            maxAssets += maxAssets
+        }
         
         let maxCount = maxAssets.count
         print("maxCount = \(maxCount)")
