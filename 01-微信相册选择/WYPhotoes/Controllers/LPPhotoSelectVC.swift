@@ -27,9 +27,9 @@ class LPPhotoSelectVC: UIViewController {
         assets?.enumerateObjects({ (asset, count, _) in
             maxAssets.append(asset)
         })
-        for _ in 0..<6 {
-            maxAssets += maxAssets
-        }
+//        for _ in 0..<6 {
+//            maxAssets += maxAssets
+//        }
         
         let maxCount = maxAssets.count
         print("maxCount = \(maxCount)")
@@ -139,17 +139,15 @@ class LPPhotoSelectVC: UIViewController {
     
     @objc private func sendBtnClick() {
         let nav = navigationController as! LPImagePickerController
-        nav.dismiss(animated: true, completion: nil)
         
-        var images = [UIImage]()
+        var models = [LPPhotoSelectModel]()
         for i in selectedIndexs {
-            let model = dataSource[i]
-            if let image = model.originImage {
-                images.append(image)
-            }
+            models.append(dataSource[i])
         }
-        
-        nav.lpdelegate?.imagePickerController(nav, didFinishPickingMediaWithInfo: images)
+        LPPhotoSelectModel.getOriginImages(models: models) { (imgs) in
+            nav.dismiss(animated: true, completion: nil)
+            nav.lpdelegate?.imagePickerController(nav, didFinishPickingMediaWithInfo: imgs)
+        }
     }
     
     func updateUIAfterSelected() {
